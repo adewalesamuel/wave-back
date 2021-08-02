@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AcceptsJson;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,13 @@ use App\Http\Controllers\AuthController;
 
 Route::name('api.')->group(function() {
 
-    Route::any('test', function () {
-        return response()->json(['status' => 'ok'], 200);
-    });
-
-    Route::any('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::middleware('auth:api')->group(function() {
-
+    Route::middleware('jwt.verify')->group(function() {
+        Route::post('test', function () {
+            return response()->json(['status' => 'ok'], 200);
+        });
     });
+
 });

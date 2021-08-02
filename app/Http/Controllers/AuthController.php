@@ -13,10 +13,14 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(LoginRequest $request) {
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->validated();
         
         if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $data = [
+                'error' => true,
+                'message' => 'Unauthorized'
+            ];
+            return response()->json($data, 401);
         }
 
         return $this->respondWithToken($token);
@@ -38,10 +42,15 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
-    {
+    {   
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        $data = [
+            'success' => true,
+            'message' => 'Successfully logged out'
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
