@@ -52,6 +52,7 @@ class RoleController extends Controller
         $role = new Role;
         $role->name = Str::ucfirst($data['name']);
         $role->slug = Str::slug($data['name'],'-');
+        $role->permissions = $data['permissions'];
 
         $role->save();
 
@@ -87,9 +88,17 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $data = $request->validated();
+        
+        $role->name = Str::ucfirst($data['name']);
+        $role->slug = Str::slug($data['name']);
+        $role->permissions = $data['permissions'];
+
+        $role->save();
+
+        return response()->json(['success' => true], 200);
     }
 
     /**

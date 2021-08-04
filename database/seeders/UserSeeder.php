@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Samuel',
             'email' => 'samuel.adewale@epistrophe.ci',
             'password' => Hash::make('password'),
-            'role_id' => 1
+            'role_id' => 3
         ]);
     }
 }
