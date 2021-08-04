@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AcceptsJson;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +24,10 @@ Route::name('api.')->group(function() {
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 
     Route::middleware('jwt.verify')->group(function() {
+
+        Route::get('roles', [RoleController::class, 'index']);
+        Route::post('roles', [RoleController::class, 'store']);
+
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ResetPassword;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\ForgotPassword;
+use App\Http\Requests\ResetPassword as ResetPasswordRequest;
+use App\Http\Requests\ForgotPassword as ForgotPasswordRequest;
 use App\Jobs\SendMailNotification;
 use App\Notifications\ForgotPassword as ForgotPasswordNotification;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
@@ -89,7 +89,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function forgotPassword(ForgotPassword $request) {
+    public function forgotPassword(ForgotPasswordRequest $request) {
         $data = $request->validated();
         $user = User::where('email', $data['email'])->firstOrFail();
         $token = Hash::make(Str::random(10));
@@ -112,7 +112,7 @@ class AuthController extends Controller
         return response()->json(['success' => true], 200); 
     }
 
-    public function resetPassword(ResetPassword $request) {
+    public function resetPassword(ResetPasswordRequest $request) {
         $data = $request->validated();
         $resetPassword = PasswordReset::where('email', $data['email'])
         ->where('token', $data['token'])->firstOrFail();

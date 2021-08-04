@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\Role as RoleRequest;
 
 class RoleController extends Controller
 {
@@ -14,7 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return response()->json($roles, 200);
     }
 
     /**
@@ -33,9 +36,26 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $data = $request->validated();
+        
+        if (Role::where('slug', Str::slug($data['name']))->exists()) {
+            $responseData = [
+                "error" => true,
+                "message" => "Role already exists"
+            ];
+
+            return response()->json($responseData, 500);
+        }
+
+        $role = new Role;
+        $role->name = Str::ucfirst($data['name']);
+        $role->slug = Str::slug($data['name'],'-');
+
+        $role->save();
+
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -44,7 +64,7 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Request $role)
     {
         //
     }
