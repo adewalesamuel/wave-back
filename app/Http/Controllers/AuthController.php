@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ResetPassword;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ForgotPassword;
 use App\Jobs\SendMailNotification;
+use App\Notifications\ForgotPassword as ForgotPasswordNotification;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Models\User;
 use App\Models\PasswordReset;
 
@@ -101,34 +103,44 @@ class AuthController extends Controller
 
         $password_reset->save();
 
-        SendMailNotification::dispatchAfterResponse($user, ['token' => $token]);
+        SendMailNotification::dispatchAfterResponse(
+            $user,
+            new ForgotPasswordNotification, 
+            ['token' => $token]
+        );
 
         return response()->json(['success' => true], 200); 
     }
 
     public function resetPassword(ResetPassword $request) {
         $data = $request->validated();
-        $status = Password::reset($data, $this->updatePasword($user, $password));
+        $resetPassword = PasswordReset::where('email', $data['email'])
+        ->where('token', $data['token'])->firstOrFail();
 
-        if ($status !== Password::PASSWORD_RESET) {
+        try {
+            DB::beginTransaction();
+
+            $user = User::where('email', $data['email'])->firstOrFail();
+            $user->password = $data['password'];
+            $user->save();
+
+            $resetPassword->delete();
+
+            SendMailNotification::dispatchAfterResponse(
+                $user,
+                new ResetPasswordNotification
+               );
+            DB::commit();
+
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
             $data = [
                 'error' => true,
-                'message' => "Could not reset password"
+                'message' => $e
             ];
 
             return response()->json($data, 500);
         }
-
-        return response()->json(['success' => true], 200);
-    }
-
-    protected function updatePasword($user, $password) {
-        $user->forceFill([
-            'password' => Hash::make($password)
-        ])->setRememberToken(Str::random(60));
-
-        $user->save();
-
-        event(new PasswordReset($user));
+        
     }
 }

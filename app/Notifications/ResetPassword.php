@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PasswordReset extends Notification
+class ResetPassword extends Notification
 {
     use Queueable;
 
@@ -41,8 +41,8 @@ class PasswordReset extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line("You are receiving this mail because you requested a password reset. Click on the link below to reset your password!")
-                    ->action('Reset my password', url(env('APP_URL') . '/reset-password?token=' . $notifiable['token']))
+                    ->line("You are receiving this mail because yout password vas reset. If you did not request this operation click on the link below to reset your password!")
+                    ->action('Change my password', url(env('APP_URL') . '/forgot-password'))
                     ->line('Thank you for using our application!');
     }
 

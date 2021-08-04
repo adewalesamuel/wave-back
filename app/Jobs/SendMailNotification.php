@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Notifications\PasswordReset;
+use Illuminate\Notifications\Notification;
 use App\Models\User;
 
 class SendMailNotification implements ShouldQueue
@@ -20,10 +20,11 @@ class SendMailNotification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, $params)
+    public function __construct(User $user, Notification $notification, $params=[])
     {
         $this->user = $user;
         $this->params = $params;
+        $this->notification = $notification;
     }
 
     /**
@@ -33,6 +34,6 @@ class SendMailNotification implements ShouldQueue
      */
     public function handle()
     {
-        $this->user->notify(new PasswordReset($this->params));
+        $this->user->notify(new $this->notification($this->params));
     }
 }
