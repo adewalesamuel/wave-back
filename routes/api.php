@@ -20,6 +20,8 @@ Route::name('api.')->group(function() {
 
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('password.forgot');
+    Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 
     Route::middleware('jwt.verify')->group(function() {
         Route::post('test', function () {
