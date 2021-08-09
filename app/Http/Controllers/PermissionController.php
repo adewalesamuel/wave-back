@@ -108,6 +108,8 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+
+        return response()->json(["success", true], 200);
     }
 }
