@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Str;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Http\Requests\Permission as PermissionRequest;
 
 class PermissionController extends Controller
 {
@@ -14,7 +17,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return response()->json($permissions, 200);
     }
 
     /**

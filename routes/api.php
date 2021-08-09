@@ -30,6 +30,11 @@ Route::name('api.')->group(function() {
         Route::put('roles/{role}', [RoleController::class, 'update']);
         Route::delete('roles/{role}', [RoleController::class, 'destroy']);
 
+        Route::get('permissions', [RoleController::class, 'index']);
+        Route::post('permissions', [RoleController::class, 'store']);
+        Route::put('permissions/{permission}', [RoleController::class, 'update']);
+        Route::delete('permissions/{permission}', [RoleController::class, 'destroy']);
+
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });
