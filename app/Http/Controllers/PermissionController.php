@@ -18,7 +18,14 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-        return response()->json($permissions, 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'permissions' => $permissions
+                ]
+            ];
+        
+        return response()->json($data, 200);
     }
 
     /**
@@ -50,13 +57,20 @@ class PermissionController extends Controller
             return response()->json($responseData, 500);
         }
 
-        $role = new Permission;
-        $role->name = Str::ucfirst($data['name']);
-        $role->slug = Str::slug($data['name'],'-');
+        $permission = new Permission;
+        $permission->name = Str::ucfirst($data['name']);
+        $permission->slug = Str::slug($data['name'],'-');
 
-        $role->save();
+        $permission->save();
 
-        return response()->json(['success' => true], 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'permission' => $permission
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -97,7 +111,14 @@ class PermissionController extends Controller
 
         $permission->save();
 
-        return response()->json(['success' => true], 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'permission' => $permission
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -110,6 +131,13 @@ class PermissionController extends Controller
     {
         $permission->delete();
 
-        return response()->json(["success", true], 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'permission' => $permission
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 }

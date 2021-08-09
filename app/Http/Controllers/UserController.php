@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Requests\StoreUser as StoreUserRequest;
+use App\Http\Requests\UpdateUser as UpdateUserRequest;
 
-class User extends Controller
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +17,15 @@ class User extends Controller
      */
     public function index()
     {
-        //
+        $users = User::where('id', '>', -1)->paginate(env('PAGINATE'));
+        $data = [
+            'success' => true,
+            'data' => [
+                'users' => $users
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**

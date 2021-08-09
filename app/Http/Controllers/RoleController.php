@@ -17,7 +17,14 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return response()->json($roles, 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'roles' => $roles
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -52,11 +59,18 @@ class RoleController extends Controller
         $role = new Role;
         $role->name = Str::ucfirst($data['name']);
         $role->slug = Str::slug($data['name'],'-');
-        $role->permissions = $data['permissions'];
+        $role->permissions = $data['permissions'] ?? null;
 
         $role->save();
 
-        return response()->json(['success' => true], 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'role' => $role
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -94,11 +108,18 @@ class RoleController extends Controller
         
         $role->name = Str::ucfirst($data['name']);
         $role->slug = Str::slug($data['name']);
-        $role->permissions = $data['permissions'];
+        $role->permissions = $data['permissions'] ??  null;
 
         $role->save();
 
-        return response()->json(['success' => true], 200);
+        $data = [
+            'success' => true,
+            'data' => [
+                'role' => $role
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -109,8 +130,15 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
+       $role->delete();
 
-        return response()->json(["success", true], 200);
+       $data = [
+            'success' => true,
+            'data' => [
+                'role' => $role
+                ]
+            ];
+            
+        return response()->json($data, 200);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Middleware\AcceptsJson;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::name('api.')->group(function() {
         Route::put('permissions/{permission}', [PermissionController::class, 'update']);
         Route::delete('permissions/{permission}', [PermissionController::class, 'destroy']);
 
+        Route::get('users', [UserController::class, 'index']);
+        Route::post('users/', [UserController::class, 'store']);
+        Route::put('users/{user}', [UserController::class, 'update']);
+        Route::delete('users/{user}', [UserController::class, 'destroy']);
+        
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });
