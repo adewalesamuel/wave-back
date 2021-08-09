@@ -88,9 +88,16 @@ class PermissionController extends Controller
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(PermissionRequest $request, Permission $permission)
     {
-        //
+        $data = $request->validated();
+        
+        $permission->name = Str::ucfirst($data['name']);
+        $permission->slug = Str::slug($data['name']);
+
+        $permission->save();
+
+        return response()->json(['success' => true], 200);
     }
 
     /**
