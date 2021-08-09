@@ -37,9 +37,26 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        //
+        $data = $request->validated();
+        
+        if (Permission::where('slug', Str::slug($data['name']))->exists()) {
+            $responseData = [
+                "error" => true,
+                "message" => "Permission already exists"
+            ];
+
+            return response()->json($responseData, 500);
+        }
+
+        $role = new Permission;
+        $role->name = Str::ucfirst($data['name']);
+        $role->slug = Str::slug($data['name'],'-');
+
+        $role->save();
+
+        return response()->json(['success' => true], 200);
     }
 
     /**

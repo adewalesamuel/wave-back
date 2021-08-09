@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AcceptsJson;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,10 +32,10 @@ Route::name('api.')->group(function() {
         Route::put('roles/{role}', [RoleController::class, 'update']);
         Route::delete('roles/{role}', [RoleController::class, 'destroy']);
 
-        Route::get('permissions', [RoleController::class, 'index']);
-        Route::post('permissions', [RoleController::class, 'store']);
-        Route::put('permissions/{permission}', [RoleController::class, 'update']);
-        Route::delete('permissions/{permission}', [RoleController::class, 'destroy']);
+        Route::get('permissions', [PermissionController::class, 'index']);
+        Route::post('permissions', [PermissionController::class, 'store']);
+        Route::put('permissions/{permission}', [PermissionController::class, 'update']);
+        Route::delete('permissions/{permission}', [PermissionController::class, 'destroy']);
 
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);

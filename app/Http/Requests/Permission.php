@@ -13,7 +13,7 @@ class Permission extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class Permission extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages() {
+        return [
+            'name.required' => 'A name is required'
         ];
     }
 }
