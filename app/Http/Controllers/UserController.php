@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUser as StoreUserRequest;
@@ -129,8 +130,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->email = $user->email . ".deactivated" . Str::random(10);
+
+        $user->save();
+        $user->delete();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'user' => $user
+                ]
+            ];
+            
+        return response()->json($data, 200);
     }
 }
