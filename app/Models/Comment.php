@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -15,19 +15,27 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
+        'post_id',
+        'comment',
         'user_id',
-        'name',
-        'slug',
-        'permissions',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
     ];
 
     /**
      * The users that belong to the Role
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

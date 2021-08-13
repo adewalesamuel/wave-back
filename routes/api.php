@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,11 @@ Route::name('api.')->group(function() {
         Route::post('users/', [UserController::class, 'store']);
         Route::put('users/{user}', [UserController::class, 'update']);
         Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+        Route::get('comments', [CommentController::class, 'index']);
+        Route::post('comments/', [CommentController::class, 'store']);
+        Route::put('comments/{comment}', [CommentController::class, 'update']);
+        Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
         
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
