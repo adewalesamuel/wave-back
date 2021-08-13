@@ -14,10 +14,10 @@ class UpdateComment extends FormRequest
      */
     public function authorize()
     {   
-        $comment = Comment::where('id', $this->route('comment'))
-        ->where('user_id', $this->user()->id());
+        $comment = Comment::where('id', $this->route('comment')->id)
+        ->where('user_id', $this->user_id)->exists();
 
-        return !$comment ? false : true;
+        return $comment;
     }
 
     /**
@@ -29,8 +29,8 @@ class UpdateComment extends FormRequest
     {
         return [
             'post_id' => 'required|integer',
-            'comment' => 'required|text',
-            'user_id' => 'required|exists:users'
+            'comment' => 'required|string',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 

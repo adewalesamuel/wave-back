@@ -95,9 +95,22 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
-    {
-        //
+    public function update(UpdateCommentRequest $request, Comment $comment)
+    {   
+        $data = $request->validated();
+        
+        $comment->comment = $data['comment'];
+
+        $comment->save();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'comment' => $comment
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**

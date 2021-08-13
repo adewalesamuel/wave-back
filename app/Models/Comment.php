@@ -21,15 +21,6 @@ class Comment extends Model
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_id',
-    ];
-
-    /**
      * The users that belong to the Role
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
