@@ -52,7 +52,7 @@ class CommentController extends Controller
 
         $comment->post_id = $data['post_id'];
         $comment->comment = $data['comment'];
-        $comment->user_id = $data['user_id'];
+        $comment->user_id = auth('api')->user()->id;
 
         $comment->save();
 
@@ -96,7 +96,7 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
-    {   
+    {         
         $data = $request->validated();
         
         $comment->comment = $data['comment'];
@@ -120,7 +120,25 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Comment $comment)
-    {
-        //
+    {   
+        if (Comment::findOrFail($comment->id)->user_id !== auth('api')->user()->id) {
+            $data = [
+                'error' => true,
+                'message' => 'Unauthorized'
+            ];
+
+            return response()->json($data, 500);
+        }   
+
+        $comment->delete();
+
+        $data = [
+             'success' => true,
+             'data' => [
+                 'comment' => $comment
+                 ]
+             ];
+             
+         return response()->json($data, 200);
     }
 }
