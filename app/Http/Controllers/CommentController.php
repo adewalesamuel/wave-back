@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreComment as StoreCommentRequest;
 use App\Http\Requests\UpdateComment as UpdateCommentRequest;
+use App\Jobs\SendMailNotification;
+use App\Notifications\NewComment as NewCommentNotification;
 
 class CommentController extends Controller
 {
@@ -55,6 +58,20 @@ class CommentController extends Controller
         $comment->user_id = auth('api')->user()->id;
 
         $comment->save();
+
+        $post_owner_email = $data['post_owner_email'] ?? 'samuel.adewale@epistrophe.ci';
+        $user = User::where('email', $post_owner_email)->first();
+        
+        if ($user) {
+            SendMailNotification::dispatchAfterResponse(
+                $user,
+                new NewCommentNotification, 
+                [
+                    'post_id' => $data['post_id'],
+                    'message' => $data['comment'],
+                    ]
+            );
+        }
 
         $data = [
             'success' => true,

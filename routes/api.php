@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::name('api.')->group(function() {
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 
     Route::middleware('jwt.verify')->group(function() {
-
+               
         Route::get('roles', [RoleController::class, 'index']);
         Route::post('roles', [RoleController::class, 'store']);
         Route::put('roles/{role}', [RoleController::class, 'update']);
@@ -48,7 +49,10 @@ Route::name('api.')->group(function() {
         Route::post('comments/', [CommentController::class, 'store']);
         Route::put('comments/{comment}', [CommentController::class, 'update']);
         Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
-        
+
+        Route::get('notifications', [NotificationController::class, 'index']);
+        Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
+
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });

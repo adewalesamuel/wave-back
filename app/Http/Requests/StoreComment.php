@@ -26,7 +26,6 @@ class StoreComment extends FormRequest
         return [
             'post_id' => 'required|integer',
             'comment' => 'required|string',
-            'user_id' => 'required|exists:users,id'
         ];
     }
 
@@ -40,7 +39,6 @@ class StoreComment extends FormRequest
         return [
             'post_id.required' => 'A post is required',
             'comment.required' => 'A coment is required',
-            'user_id.required' => 'A user is required',
         ];
     }
 }
