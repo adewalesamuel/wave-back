@@ -16,9 +16,9 @@ class NewComment extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $params)
     {
-        //
+        $this->params = $params;
     }
 
     /**
@@ -39,10 +39,11 @@ class NewComment extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
+    {   
+        $post_id = $this->params['post_id'];
         return (new MailMessage)
                     ->line('A new comment was made to the a post')
-                    ->action('See comment', url(env('APP_URL') . '/post/' . $notifiable['post_id']))
+                    ->action('See comment', url(env('APP_URL') . '/post/' . $post_id))
                     ->line('Thank you for using our application!');
     }
 
@@ -55,9 +56,9 @@ class NewComment extends Notification
     public function toArray($notifiable)
     {
         return [
-            'post_id' => $notifiable['post_id'],
+            'post_id' => $this->params['post_id'],
             'sender' => auth('api')->user(),
-            'message' => $notifiable['comment']
+            'message' => $this->params['comment']
         ];
     }
 }

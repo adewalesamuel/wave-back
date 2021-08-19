@@ -65,10 +65,13 @@ class CommentController extends Controller
         if ($user) {
             SendMailNotification::dispatchAfterResponse(
                 $user,
-                new NewCommentNotification, 
+                new NewCommentNotification( [
+                    'post_id' => $data['post_id'],
+                    'comment' => $data['comment'],
+                    ]), 
                 [
                     'post_id' => $data['post_id'],
-                    'message' => $data['comment'],
+                    'comment' => $data['comment'],
                     ]
             );
         }

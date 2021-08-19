@@ -105,7 +105,7 @@ class AuthController extends Controller
 
         SendMailNotification::dispatchAfterResponse(
             $user,
-            new ForgotPasswordNotification, 
+            new ForgotPasswordNotification(['token' => $token]),
             ['token' => $token]
         );
 

@@ -16,9 +16,9 @@ class ForgotPassword extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $params)
     {
-        //
+        $this->params = $params;
     }
 
     /**
@@ -40,9 +40,10 @@ class ForgotPassword extends Notification
      */
     public function toMail($notifiable)
     {
+        $token = $this->params['token'];
         return (new MailMessage)
                     ->line("You are receiving this mail because you requested a password reset. Click on the link below to reset your password!")
-                    ->action('Reset my password', url(env('APP_URL') . '/reset-password?token=' . $notifiable['token']))
+                    ->action('Reset my password', url(env('APP_URL') . '/auth/reset-password?token=' . $token))
                     ->line('Thank you for using our application!');
     }
 
