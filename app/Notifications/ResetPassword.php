@@ -41,8 +41,8 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line("You are receiving this mail because yout password vas reset. If you did not request this operation click on the link below to reset your password!")
-                    ->action('Change my password', url(env('APP_URL') . '/forgot-password'))
+                    ->line("You are receiving this mail because your password was reset. If you did not request this operation click on the link below to reset your password!")
+                    ->action('Change my password', url(env('APP_URL') . '/auth/forgot-password'))
                     ->line('Thank you for using our application!');
     }
 

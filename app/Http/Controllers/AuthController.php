@@ -114,13 +114,12 @@ class AuthController extends Controller
 
     public function resetPassword(ResetPasswordRequest $request) {
         $data = $request->validated();
-        $resetPassword = PasswordReset::where('email', $data['email'])
-        ->where('token', $data['token'])->firstOrFail();
+        $resetPassword = PasswordReset::where('token', $data['token'])->firstOrFail();
 
         try {
             DB::beginTransaction();
 
-            $user = User::where('email', $data['email'])->firstOrFail();
+            $user = User::where('email', $resetPassword->email)->firstOrFail();
             $user->password = $data['password'];
             $user->save();
 
