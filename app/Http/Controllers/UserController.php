@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '>', -1)->paginate(env('PAGINATE'));
+        $users = User::with('role')->orderBy('created_at', 'desc')->get();
         $data = [
             'success' => true,
             'data' => [
