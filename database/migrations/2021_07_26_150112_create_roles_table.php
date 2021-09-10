@@ -19,6 +19,7 @@ class CreateRolesTable extends Migration
             $table->string('slug')->unique();
             $table->json('permissions')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

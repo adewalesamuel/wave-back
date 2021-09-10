@@ -22,8 +22,9 @@ class CreateDisaggregationsTable extends Migration
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->foreignId('indicator_id')
+            ->nullable()    
             ->constrained()
-            ->onDelete('cascade');
+            ->nullOnDelete();
         });
     }
 

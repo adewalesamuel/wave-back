@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\IndicatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,11 @@ Route::name('api.')->group(function() {
         Route::post('activities/', [ActivityController::class, 'store']);
         Route::put('activities/{activity}', [ActivityController::class, 'update']);
         Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
+        
+        Route::get('indicators', [IndicatorController::class, 'index']);
+        Route::post('indicators/', [IndicatorController::class, 'store']);
+        Route::put('indicators/{indicator}', [IndicatorController::class, 'update']);
+        Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy']);
         
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);

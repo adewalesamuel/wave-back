@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Indicator;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreIndicator as StoreIndicatorRequest;
+use App\Http\Requests\UpdateIndicator as UpdateIndicatorRequest;
 
 class IndicatorController extends Controller
 {
@@ -14,7 +16,15 @@ class IndicatorController extends Controller
      */
     public function index()
     {
-        //
+        $indicators = Indicator::with('activity')->orderBy('created_at', 'desc')->get();
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicators' => $indicators
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -33,9 +43,32 @@ class IndicatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreIndicatorRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $indicator = new Indicator;
+        
+        $indicator->name = $data['name'];
+        $indicator->description = $data['description'] ?? null;
+        $indicator->type = $data['type'] ?? 'number';
+        $indicator->direction = $data['direction'] ?? 'increasing';
+        $indicator->baseline = $data['baseline'] ?? null;
+        $indicator->target = $data['target'] ?? null;
+        $indicator->unit = $data['unit'] ?? null;
+        $indicator->activity_id = $data['activity_id'];
+        $indicator->created_by = auth('api')->user()->id;
+            
+        $indicator->save();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicator' => $indicator
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -67,9 +100,30 @@ class IndicatorController extends Controller
      * @param  \App\Models\Indicator  $indicator
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Indicator $indicator)
+    public function update(UpdateIndicatorRequest $request, Indicator $indicator)
     {
-        //
+        $data = $request->validated();
+        
+        $indicator->name = $data['name'];
+        $indicator->description = $data['description'] ?? null;
+        $indicator->type = $data['type'] ?? 'number';
+        $indicator->direction = $data['direction'] ?? 'increasing';
+        $indicator->baseline = $data['baseline'] ?? null;
+        $indicator->target = $data['target'] ?? null;
+        $indicator->unit = $data['unit'] ?? null;
+        $indicator->activity_id = $data['activity_id'];
+        $indicator->updated_by = auth('api')->user()->id;
+            
+        $indicator->save();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicator' => $indicator
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -79,7 +133,16 @@ class IndicatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Indicator $indicator)
-    {
-        //
+    {  
+        $indicator->delete();
+
+        $data = [
+             'success' => true,
+             'data' => [
+                    'indicator' => $indicator
+                 ]
+             ];
+             
+         return response()->json($data, 200);
     }
 }

@@ -17,13 +17,14 @@ class CreateCollectedDataTable extends Migration
             $table->id();
             $table->string('values');
             $table->string('notes')->nullable();
-            $table->date('collected_date');
+            $table->date('collection_date');
             $table->string('file_name')->nullable();
             $table->string('file_url')->nullable();
             $table->json('disaggregation_values')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreignId('indicator_id')
             ->constrained()
             ->onDelete('cascade');

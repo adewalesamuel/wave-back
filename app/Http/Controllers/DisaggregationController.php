@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disaggregation;
+use App\Models\Indicator;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreDisaggregation as StoreDisaggregationRequest;
+use App\Http\Requests\UpdateDisaggregation as UpdateDisaggregationRequest;
 
 class DisaggregationController extends Controller
 {
@@ -12,9 +15,17 @@ class DisaggregationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {   
+        $disaggregations = Disaggregation::orderBy('created_at', 'desc')->get();
+        $data = [
+            'success' => true,
+            'data' => [
+                'disaggregations' => $disaggregations
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**

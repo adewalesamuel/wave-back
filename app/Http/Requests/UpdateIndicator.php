@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProject extends FormRequest
+class UpdateIndicator extends FormRequest
 {
-    /**
+/**
     * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -24,12 +24,14 @@ class StoreProject extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:projects',
+            'name' => 'required|string',
             'description' => 'string',
-            'countries' => 'json',
-            'status' => 'string',
-            'start_date' => 'date|required',
-            'end_date' => 'date|required',
+            'type' => 'string',
+            'direction' => 'string',
+            'baseline' => 'integer',
+            'target' => 'integer',
+            'unit' => 'integer',
+            'activity_id' => 'integer|required',
         ];
     }
 
@@ -41,9 +43,8 @@ class StoreProject extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'A project name is required',
-            'start_date.required' => 'An start date is required',
-            'end_date.required' => 'An end date is required',
+            'name.required' => 'An indicatore name is required',
+            'activity_id.required' => 'An activity is required',
         ];
     }
 }

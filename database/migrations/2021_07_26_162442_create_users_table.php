@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('lastname');
             $table->string('firstname');
+            $table->string('profile_url')->nullable();
             $table->string('tel')->nullable();
             $table->string('email')->unique();
             $table->json('permissions')->nullable();
@@ -26,8 +27,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->foreignId('role_id')
+            ->nullable()
             ->constrained()
-            ->onDelete('cascade');
+            ->nullOnDelete();
         });
     }
 

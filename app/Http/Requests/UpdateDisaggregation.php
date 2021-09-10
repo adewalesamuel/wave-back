@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProject extends FormRequest
+class UpdateDisaggregation extends FormRequest
 {
-    /**
+     /**
     * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -24,12 +24,10 @@ class StoreProject extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:projects',
-            'description' => 'string',
-            'countries' => 'json',
-            'status' => 'string',
-            'start_date' => 'date|required',
-            'end_date' => 'date|required',
+            'type' => 'required|string',
+            'availability' => 'string|required',
+            'fields' => 'json|required',
+            'indicator_id' => 'integer|required'
         ];
     }
 
@@ -41,9 +39,10 @@ class StoreProject extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'A project name is required',
-            'start_date.required' => 'An start date is required',
-            'end_date.required' => 'An end date is required',
+            'type.required' => 'A disaggregation type is required',
+            'availability.required' => 'An disaggregation availability is required',
+            'fields.required' => 'A disaggregation filed is required',
+            'indicator_id.required' => 'An indication is required',
         ];
     }
 }

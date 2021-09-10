@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('description')->nullable();
             $table->enum('status', ['open', 'closed', 'pending'])->default('open');
             $table->timestamps();
+            $table->softDeletes();
             $table->date('start_date');
             $table->date('end_date');
             $table->bigInteger('budget')->nullable();
@@ -26,7 +27,10 @@ class CreateActivitiesTable extends Migration
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('activity_id')->nullable();
-            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('user_id')
+            ->nullable()
+            ->constrained()
+            ->nullOnDelete();
             $table->foreignId('project_id')
             ->constrained()
             ->onDelete('cascade');
