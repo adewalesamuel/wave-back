@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('created_at', 'desc')->get();
         $data = [
             'success' => true,
             'data' => [

@@ -45,7 +45,7 @@ class StoreUser extends FormRequest
             'firstname.required' => 'A firstname is required',
             'lastname.required' => 'A lastname is required',
             'tel' => 'string',
-            'email.required' => 'A is requirednique:users',
+            'email.required' => 'An email is required',
             'permissions' => 'json',
             'password.required' => 'A password is required',
             'role_id.required' => 'A role is required'

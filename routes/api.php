@@ -9,6 +9,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,10 +51,21 @@ Route::name('api.')->group(function() {
         Route::post('comments/', [CommentController::class, 'store']);
         Route::put('comments/{comment}', [CommentController::class, 'update']);
         Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
-
+       
+        
         Route::get('notifications', [NotificationController::class, 'index']);
         Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
-
+        
+        Route::get('projects', [ProjectController::class, 'index']);
+        Route::post('projects/', [ProjectController::class, 'store']);
+        Route::put('projects/{project}', [ProjectController::class, 'update']);
+        Route::delete('projects/{project}', [ProjectController::class, 'destroy']);
+       
+        Route::get('activities', [ActivityController::class, 'index']);
+        Route::post('activities/', [ActivityController::class, 'store']);
+        Route::put('activities/{activity}', [ActivityController::class, 'update']);
+        Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
+        
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });
