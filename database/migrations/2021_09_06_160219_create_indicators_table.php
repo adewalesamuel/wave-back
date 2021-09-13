@@ -18,7 +18,7 @@ class CreateIndicatorsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->enum('type', ['number', 'percentage'])->default('number');
-            $table->enum('direction', ['inscreasing', 'decreasing'])->default('inscreasing');
+            $table->enum('direction', ['increasing', 'decreasing'])->default('increasing');
             $table->bigInteger('baseline')->nullable();
             $table->bigInteger('target')->nullable();
             $table->string('unit')->nullable();

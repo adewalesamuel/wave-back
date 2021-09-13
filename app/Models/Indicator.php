@@ -35,4 +35,14 @@ class Indicator extends Model
     {
         return $this->belongsTo(Activity::class);
     }
+    
+    /**
+     * Get the disaggregation that owns the Indicator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function disaggregations()
+    {
+        return $this->hasMany(Disaggregation::class);
+    }
 }

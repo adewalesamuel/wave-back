@@ -12,6 +12,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\IndicatorController;
+use App\Http\Controllers\DisaggregationController;
+use App\Http\Controllers\IndicatorDisaggregationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +46,12 @@ Route::name('api.')->group(function() {
         Route::delete('permissions/{permission}', [PermissionController::class, 'destroy']);
 
         Route::get('users', [UserController::class, 'index']);
-        Route::post('users/', [UserController::class, 'store']);
+        Route::post('users', [UserController::class, 'store']);
         Route::put('users/{user}', [UserController::class, 'update']);
         Route::delete('users/{user}', [UserController::class, 'destroy']);
 
         Route::get('comments', [CommentController::class, 'index']);
-        Route::post('comments/', [CommentController::class, 'store']);
+        Route::post('comments', [CommentController::class, 'store']);
         Route::put('comments/{comment}', [CommentController::class, 'update']);
         Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
        
@@ -58,19 +60,29 @@ Route::name('api.')->group(function() {
         Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
         
         Route::get('projects', [ProjectController::class, 'index']);
-        Route::post('projects/', [ProjectController::class, 'store']);
+        Route::post('projects', [ProjectController::class, 'store']);
         Route::put('projects/{project}', [ProjectController::class, 'update']);
         Route::delete('projects/{project}', [ProjectController::class, 'destroy']);
+        Route::delete('projects/{project}/members', [ProjectController::class, 'index']);
        
         Route::get('activities', [ActivityController::class, 'index']);
-        Route::post('activities/', [ActivityController::class, 'store']);
+        Route::post('activities', [ActivityController::class, 'store']);
         Route::put('activities/{activity}', [ActivityController::class, 'update']);
         Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
         
         Route::get('indicators', [IndicatorController::class, 'index']);
-        Route::post('indicators/', [IndicatorController::class, 'store']);
+        Route::post('indicators', [IndicatorController::class, 'store']);
         Route::put('indicators/{indicator}', [IndicatorController::class, 'update']);
-        Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy']);
+        Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy']); 
+        Route::get('indicators/{indicator}/disaggregations', [IndicatorController::class, 'disaggregations']);
+       
+        Route::get('disaggregations', [DisaggregationController::class, 'index']);
+        Route::post('disaggregations', [DisaggregationController::class, 'store']);
+        Route::put('disaggregations/{disaggregation}', [DisaggregationController::class, 'update']);
+        Route::delete('disaggregations/{disaggregation}', [DisaggregationController::class, 'destroy']); 
+        
+        Route::post('indicator_disaggregations', [IndicatorDisaggregationController::class, 'store']); 
+        Route::delete('indicator_disaggregations/{indicator_disaggregation}', [IndicatorDisaggregationController::class, 'destroy']); 
         
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);

@@ -44,9 +44,28 @@ class DisaggregationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDisaggregationRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $disaggregation = new Disaggregation;
+        
+        $disaggregation->type = $data['type'];
+        $disaggregation->availability = $data['availability'] ?? "organisation";
+        $disaggregation->fields = $data['fields'] ?? null;
+        $disaggregation->indicator_id = $data['indicator_id'] ?? null;
+        $disaggregation->created_by = auth('api')->user()->id;
+            
+        $disaggregation->save();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'disaggregation' => $disaggregation
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -78,9 +97,26 @@ class DisaggregationController extends Controller
      * @param  \App\Models\Disaggregation  $disaggregation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Disaggregation $disaggregation)
+    public function update(UpdateDisaggregationRequest $request, Disaggregation $disaggregation)
     {
-        //
+        $data = $request->validated();
+        
+        $disaggregation->type = $data['type'];
+        $disaggregation->availability = $data['availability'] ?? "organisation";
+        $disaggregation->fields = $data['fields'] ?? null;
+        $disaggregation->indicator_id = $data['indicator_id'] ?? null;
+        $disaggregation->updated_by = auth('api')->user()->id;
+            
+        $disaggregation->save();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'disaggregation' => $disaggregation
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -91,6 +127,15 @@ class DisaggregationController extends Controller
      */
     public function destroy(Disaggregation $disaggregation)
     {
-        //
+        $disaggregation->delete();
+
+        $data = [
+             'success' => true,
+             'data' => [
+                    'disaggregation' => $disaggregation
+                 ]
+             ];
+             
+         return response()->json($data, 200);
     }
 }

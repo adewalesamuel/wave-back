@@ -13,7 +13,7 @@ class CreateProjetMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('projet_members', function (Blueprint $table) {
+        Schema::create('project_members', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('created_by')->nullable();
             $table->timestamps();

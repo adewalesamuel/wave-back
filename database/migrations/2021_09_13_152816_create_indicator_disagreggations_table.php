@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDisaggregationsTable extends Migration
+class CreateIndicatorDisagreggationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreateDisaggregationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('disaggregations', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('type');
-            $table->enum('availability', ['indicator', 'project', 'organisation'])->default('organisation');
-            $table->json("fields");
+        Schema::create('indicator_disaggregations', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('created_by')->nullable();
-            $table->bigInteger('updated_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
             $table->foreignId('indicator_id')
-            ->nullable()    
             ->constrained()
-            ->nullOnDelete();
+            ->onDelete('cascade'); 
+            $table->foreignId('disaggregation_id')
+            ->constrained()
+            ->onDelete('cascade');
         });
     }
 
@@ -36,6 +33,6 @@ class CreateDisaggregationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disaggregations');
+        Schema::dropIfExists('indicator_disagreggations');
     }
 }
