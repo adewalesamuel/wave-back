@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indicator;
-use App\Models\IndicatorDisaggregation;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIndicator as StoreIndicatorRequest;
 use App\Http\Requests\UpdateIndicator as UpdateIndicatorRequest;

@@ -38,4 +38,14 @@ class Activity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get all of the indicators for the Activity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function indicators()
+    {
+        return $this->hasMany(Indicator::class);
+    }
 }

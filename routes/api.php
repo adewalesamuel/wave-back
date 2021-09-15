@@ -14,6 +14,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\IndicatorController;
 use App\Http\Controllers\DisaggregationController;
 use App\Http\Controllers\IndicatorDisaggregationController;
+use App\Http\Controllers\ProjectMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,12 +64,15 @@ Route::name('api.')->group(function() {
         Route::post('projects', [ProjectController::class, 'store']);
         Route::put('projects/{project}', [ProjectController::class, 'update']);
         Route::delete('projects/{project}', [ProjectController::class, 'destroy']);
-        Route::delete('projects/{project}/members', [ProjectController::class, 'index']);
+        Route::get('projects/{project}/members', [ProjectController::class, 'members']);
+        Route::get('projects/{project}/activities', [ProjectController::class, 'activities']);
+        Route::get('projects/{project}/indicators', [ProjectController::class, 'indicators']);
        
         Route::get('activities', [ActivityController::class, 'index']);
         Route::post('activities', [ActivityController::class, 'store']);
         Route::put('activities/{activity}', [ActivityController::class, 'update']);
         Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
+        Route::get('activities/{activity}/indicators', [ActivityController::class, 'indicators']);
         
         Route::get('indicators', [IndicatorController::class, 'index']);
         Route::post('indicators', [IndicatorController::class, 'store']);
@@ -83,6 +87,9 @@ Route::name('api.')->group(function() {
         
         Route::post('indicator_disaggregations', [IndicatorDisaggregationController::class, 'store']); 
         Route::delete('indicator_disaggregations/{indicator_disaggregation}', [IndicatorDisaggregationController::class, 'destroy']); 
+
+        Route::post('project_members', [ProjectMemberController::class, 'store']); 
+        Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy']); 
         
         Route::post('test', function () {
             return response()->json(['status' => 'ok'], 200);

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectMember;
+use App\Models\Activity;
+use App\Models\Indicator;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProject as StoreProjectRequest;
 use App\Http\Requests\UpdateProject as UpdateProjectRequest;
@@ -21,6 +24,84 @@ class ProjectController extends Controller
             'success' => true,
             'data' => [
                 'projects' => $projects
+                ]
+            ];
+
+        return response()->json($data, 200);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function members(Request $request, Project $project)
+    {
+        $project_members = ProjectMember::with('user')
+        ->where('project_id', $project->id)->get();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'project_members' => $project_members
+                ]
+            ];
+
+        return response()->json($data, 200);
+    }
+   
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activities(Request $request, Project $project)
+    {
+        $parent_activities = Activity::where('project_id', $project->id)->whereNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $child_activities = Activity::where('project_id', $project->id)->whereNotNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $activities = [];
+
+        foreach ($parent_activities as $key => $value) {
+            $parent_activity = $value;
+            $children = [];
+
+            foreach ($child_activities as $key => $value) {
+                $child_activity = $value;
+                if ($parent_activity['id'] === $child_activity['activity_id']) {
+                    $children[] = $child_activity;
+                }
+            }
+
+            $parent_activity['children'] = $children;       
+            $activities[] = $parent_activity;
+        };
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'activities' => $activities
+                ]
+            ];
+
+        return response()->json($data, 200);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indicators(Request $request, Project $project)
+    {   
+        $activities_id = $project->activities->map(function($activity) {
+            return $activity->id;
+        });
+        $indicators = Indicator::whereIn('activity_id', $activities_id)->get();
+
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicators' => $indicators
                 ]
             ];
 

@@ -9,4 +9,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CollectedData extends Model
 {
     use HasFactory, softDeletes;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'values', 
+        'notes',
+        'collection_date',
+        'file_name',
+        'file_url',
+        'disaggregation_values',
+        'indicator_id',
+    ];
 }

@@ -24,4 +24,14 @@ class Project extends Model
         'start_date',
         'end_date',
     ];
+
+    /**
+     * Get all of the activities for the Project
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }

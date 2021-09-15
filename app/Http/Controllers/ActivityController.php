@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Indicator;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreActivity as StoreActivityRequest;
 use App\Http\Requests\UpdateActivity as UpdateActivityRequest;
@@ -42,6 +43,23 @@ class ActivityController extends Controller
             'success' => true,
             'data' => [
                 'activities' => $activities
+                ]
+            ];
+
+        return response()->json($data, 200);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indicators(Request $request, Activity $activity)
+    {   
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicators' => $activity->indicators
                 ]
             ];
 
