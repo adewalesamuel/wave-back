@@ -45,4 +45,14 @@ class Indicator extends Model
     {
         return $this->hasMany(Disaggregation::class);
     }
+  
+    /**
+     * Get the collected_data that owns the Indicator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function collected_data()
+    {
+        return $this->hasMany(CollectedData::class);
+    }
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\IndicatorController;
 use App\Http\Controllers\DisaggregationController;
 use App\Http\Controllers\IndicatorDisaggregationController;
 use App\Http\Controllers\ProjectMemberController;
+use App\Http\Controllers\CollectedDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +68,10 @@ Route::name('api.')->group(function() {
         Route::get('projects/{project}/members', [ProjectController::class, 'members']);
         Route::get('projects/{project}/activities', [ProjectController::class, 'activities']);
         Route::get('projects/{project}/indicators', [ProjectController::class, 'indicators']);
-       
+        
+        Route::post('project_members', [ProjectMemberController::class, 'store']); 
+        Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy']); 
+        
         Route::get('activities', [ActivityController::class, 'index']);
         Route::post('activities', [ActivityController::class, 'store']);
         Route::put('activities/{activity}', [ActivityController::class, 'update']);
@@ -79,7 +83,8 @@ Route::name('api.')->group(function() {
         Route::put('indicators/{indicator}', [IndicatorController::class, 'update']);
         Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy']); 
         Route::get('indicators/{indicator}/disaggregations', [IndicatorController::class, 'disaggregations']);
-       
+        Route::get('indicators/{indicator}/collected_data', [IndicatorController::class, 'collected_data']);
+        
         Route::get('disaggregations', [DisaggregationController::class, 'index']);
         Route::post('disaggregations', [DisaggregationController::class, 'store']);
         Route::put('disaggregations/{disaggregation}', [DisaggregationController::class, 'update']);
@@ -87,13 +92,17 @@ Route::name('api.')->group(function() {
         
         Route::post('indicator_disaggregations', [IndicatorDisaggregationController::class, 'store']); 
         Route::delete('indicator_disaggregations/{indicator_disaggregation}', [IndicatorDisaggregationController::class, 'destroy']); 
-
-        Route::post('project_members', [ProjectMemberController::class, 'store']); 
-        Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy']); 
+       
+        Route::get('collected_data', [CollectedDataController::class, 'index']);
+        Route::post('collected_data', [CollectedDataController::class, 'store']);
+        Route::post('collected_data/{collected_data}', [CollectedDataController::class, 'update']);
+        Route::delete('collected_data/{collected_data}', [CollectedDataController::class, 'destroy']); 
         
-        Route::post('test', function () {
+
+        Route::any('test', function () {
             return response()->json(['status' => 'ok'], 200);
         });
+        // ->middleware('can:create,App\Models\Post');
     });
 
 });

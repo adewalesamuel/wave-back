@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indicator;
+use App\Models\CollectedData;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIndicator as StoreIndicatorRequest;
 use App\Http\Requests\UpdateIndicator as UpdateIndicatorRequest;
@@ -27,7 +28,7 @@ class IndicatorController extends Controller
         return response()->json($data, 200);
     }
 
-       /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -35,12 +36,29 @@ class IndicatorController extends Controller
     public function disaggregations(Request $request, Indicator $indicator)
     {
         $disaggregations = IndicatorDisaggregation::with('disaggregation')
-        ->where('indicator_id', $indicator->id)->get();
+        ->where('indicator_id', $indicator->id)->orderBy('created_at', 'desc')->get();
 
         $data = [
             'success' => true,
             'data' => [
                 'indicator_disaggregations' => $disaggregations
+                ]
+            ];
+
+        return response()->json($data, 200);
+    }
+  
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function collected_data(Request $request, Indicator $indicator)
+    {
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicator_collected_data' => $indicator->collected_data
                 ]
             ];
 
