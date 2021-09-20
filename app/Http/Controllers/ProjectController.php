@@ -57,8 +57,8 @@ class ProjectController extends Controller
      */
     public function activities(Request $request, Project $project)
     {
-        $parent_activities = Activity::where('project_id', $project->id)->whereNull('activity_id')->orderBy('created_at', 'desc')->get();
-        $child_activities = Activity::where('project_id', $project->id)->whereNotNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $parent_activities = Activity::where('project_id', $project->id)->whereNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
+        $child_activities = Activity::where('project_id', $project->id)->whereNotNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
         $activities = [];
 
         foreach ($parent_activities as $key => $value) {

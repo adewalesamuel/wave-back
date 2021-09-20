@@ -19,8 +19,8 @@ class ActivityController extends Controller
     public function index()
     {   
 
-        $parent_activities = Activity::whereNull('activity_id')->orderBy('created_at', 'desc')->get();
-        $child_activities = Activity::whereNotNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $parent_activities = Activity::whereNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
+        $child_activities = Activity::whereNotNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
         $activities = [];
 
         foreach ($parent_activities as $key => $value) {
@@ -54,12 +54,12 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indicators(Request $request, Activity $activity)
+    public function indicator(Request $request, Activity $activity)
     {   
         $data = [
             'success' => true,
             'data' => [
-                'indicators' => $activity->indicators
+                'indicators' => $activity->indicator
                 ]
             ];
 

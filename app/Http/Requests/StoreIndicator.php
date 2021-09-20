@@ -31,7 +31,7 @@ class StoreIndicator extends FormRequest
             'baseline' => 'integer',
             'target' => 'integer',
             'unit' => 'integer',
-            'activity_id' => 'integer|required',
+            'activity_id' => 'integer|required|exists:activities,id|unique:indicators',
         ];
     }
 

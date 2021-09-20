@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Indicator;
 use App\Models\CollectedData;
+use App\Models\IndicatorDisaggregation;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIndicator as StoreIndicatorRequest;
 use App\Http\Requests\UpdateIndicator as UpdateIndicatorRequest;
@@ -58,7 +59,7 @@ class IndicatorController extends Controller
         $data = [
             'success' => true,
             'data' => [
-                'indicator_collected_data' => $indicator->collected_data
+                'indicator_collected_data' => $indicator->collected_data->SortByDesc('created_at')
                 ]
             ];
 

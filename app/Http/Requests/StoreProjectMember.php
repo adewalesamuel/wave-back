@@ -37,7 +37,7 @@ class StoreProjectMember extends FormRequest
     public function messages()
     {
         return [
-            'project_id.required' => 'An project is required',
+            'project_id.required' => 'A project is required',
             'user.required' => 'A user is required',
         ];
     }

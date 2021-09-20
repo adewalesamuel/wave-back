@@ -11,6 +11,9 @@ class IndicatorDisaggregationController extends Controller
     public function store(StoreIndicatorDisaggregationRequest $request) {
         $data = $request->validated();
 
+        if (IndicatorDisaggregation::where('indicator_id', $data['indicator_id'])->where('disaggregation_id', $data['disaggregation_id'])->exists())
+            throw new \Exception("The Disaggregation already exist for this indicator", 1);
+
         $indicator_disaggregation = new IndicatorDisaggregation;
         
         $indicator_disaggregation->indicator_id = $data['indicator_id'] ?? null;

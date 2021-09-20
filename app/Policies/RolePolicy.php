@@ -10,6 +10,8 @@ class RolePolicy
 {
     use HandlesAuthorization;
 
+    const MODEL = "roles";
+
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +20,7 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return in_array("view-any-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -30,7 +32,7 @@ class RolePolicy
      */
     public function view(User $user, Role $role)
     {
-        //
+        return in_array("view-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -41,7 +43,7 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array("create-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -53,7 +55,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        //
+        return in_array("update-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -65,7 +67,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        //
+        return in_array("delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -77,7 +79,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role)
     {
-        //
+        return in_array("restore-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -89,6 +91,6 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role)
     {
-        //
+        return in_array("force-delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 }

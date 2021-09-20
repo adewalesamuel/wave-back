@@ -29,7 +29,6 @@ use App\Http\Controllers\CollectedDataController;
 */
 
 Route::name('api.')->group(function() {
-
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::any('forgot-password', [AuthController::class, 'forgotPassword'])->name('password.forgot');
@@ -37,70 +36,69 @@ Route::name('api.')->group(function() {
 
     Route::middleware('jwt.verify')->group(function() {
                
-        Route::get('roles', [RoleController::class, 'index']);
-        Route::post('roles', [RoleController::class, 'store']);
-        Route::put('roles/{role}', [RoleController::class, 'update']);
-        Route::delete('roles/{role}', [RoleController::class, 'destroy']);
+        Route::get('roles', [RoleController::class, 'index'])->middleware('can:viewAny,App\Models\Role');
+        Route::post('roles', [RoleController::class, 'store'])->middleware('can:create,App\Models\Role');
+        Route::put('roles/{role}', [RoleController::class, 'update'])->middleware('can:update,role');
+        Route::delete('roles/{role}', [RoleController::class, 'destroy'])->middleware('can:delete,role');
 
         Route::get('permissions', [PermissionController::class, 'index']);
-        Route::post('permissions', [PermissionController::class, 'store']);
-        Route::put('permissions/{permission}', [PermissionController::class, 'update']);
-        Route::delete('permissions/{permission}', [PermissionController::class, 'destroy']);
+        Route::post('permissions', [PermissionController::class, 'store'])->middleware('can:create,App\Models\Permission');
+        Route::put('permissions/{permission}', [PermissionController::class, 'update'])->middleware('can:update,permission');
+        Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->middleware('can:delete,permission');
 
-        Route::get('users', [UserController::class, 'index']);
-        Route::post('users', [UserController::class, 'store']);
-        Route::put('users/{user}', [UserController::class, 'update']);
-        Route::delete('users/{user}', [UserController::class, 'destroy']);
+        Route::get('users', [UserController::class, 'index'])->middleware('can:viewAny,App\Models\User');
+        Route::post('users', [UserController::class, 'store'])->middleware('can:create,App\Models\User');
+        Route::put('users/{user}', [UserController::class, 'update'])->middleware('can:update,user');
+        Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('can:delete,user');
 
-        Route::get('comments', [CommentController::class, 'index']);
-        Route::post('comments', [CommentController::class, 'store']);
-        Route::put('comments/{comment}', [CommentController::class, 'update']);
-        Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
+        Route::get('comments', [CommentController::class, 'index'])->middleware('can:viewAny,App\Models\Comment');
+        Route::post('comments', [CommentController::class, 'store'])->middleware('can:create,App\Models\Comment');
+        Route::put('comments/{comment}', [CommentController::class, 'update'])->middleware('can:update,comment');
+        Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->middleware('can:delete,comment');
        
         
         Route::get('notifications', [NotificationController::class, 'index']);
         Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
         
-        Route::get('projects', [ProjectController::class, 'index']);
-        Route::post('projects', [ProjectController::class, 'store']);
-        Route::put('projects/{project}', [ProjectController::class, 'update']);
-        Route::delete('projects/{project}', [ProjectController::class, 'destroy']);
-        Route::get('projects/{project}/members', [ProjectController::class, 'members']);
-        Route::get('projects/{project}/activities', [ProjectController::class, 'activities']);
-        Route::get('projects/{project}/indicators', [ProjectController::class, 'indicators']);
+        Route::get('projects', [ProjectController::class, 'index'])->middleware('can:viewAny,App\Models\Project');
+        Route::post('projects', [ProjectController::class, 'store'])->middleware('can:create,App\Models\Project');
+        Route::put('projects/{project}', [ProjectController::class, 'update'])->middleware('can:update,project');
+        Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->middleware('can:delete,project');
+        Route::get('projects/{project}/members', [ProjectController::class, 'members'])->middleware('can:viewAny,App\Models\ProjectMember');
+        Route::get('projects/{project}/activities', [ProjectController::class, 'activities'])->middleware('can:viewAny,App\Models\Activity');
+        Route::get('projects/{project}/indicators', [ProjectController::class, 'indicators'])->middleware('can:viewAny,App\Models\Indicator');
         
-        Route::post('project_members', [ProjectMemberController::class, 'store']); 
-        Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy']); 
+        Route::post('project_members', [ProjectMemberController::class, 'store'])->middleware('can:create,App\Models\ProjectMember');
+        Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy'])->middleware('can:delete,project_member');
         
-        Route::get('activities', [ActivityController::class, 'index']);
-        Route::post('activities', [ActivityController::class, 'store']);
-        Route::put('activities/{activity}', [ActivityController::class, 'update']);
-        Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
-        Route::get('activities/{activity}/indicators', [ActivityController::class, 'indicators']);
+        Route::get('activities', [ActivityController::class, 'index'])->middleware('can:viewAny,App\Models\Activity');
+        Route::post('activities', [ActivityController::class, 'store'])->middleware('can:create,App\Models\Activity');
+        Route::put('activities/{activity}', [ActivityController::class, 'update'])->middleware('can:update,activity');
+        Route::delete('activities/{activity}', [ActivityController::class, 'destroy'])->middleware('can:delete,activity');
         
-        Route::get('indicators', [IndicatorController::class, 'index']);
-        Route::post('indicators', [IndicatorController::class, 'store']);
-        Route::put('indicators/{indicator}', [IndicatorController::class, 'update']);
-        Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy']); 
-        Route::get('indicators/{indicator}/disaggregations', [IndicatorController::class, 'disaggregations']);
-        Route::get('indicators/{indicator}/collected_data', [IndicatorController::class, 'collected_data']);
+        Route::get('indicators', [IndicatorController::class, 'index'])->middleware('can:viewAny,App\Models\Indicator');
+        Route::post('indicators', [IndicatorController::class, 'store'])->middleware('can:create,App\Models\Indicator');
+        Route::put('indicators/{indicator}', [IndicatorController::class, 'update'])->middleware('can:update,indicator');
+        Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy'])->middleware('can:delete,indicator'); 
+        Route::get('indicators/{indicator}/disaggregations', [IndicatorController::class, 'disaggregations'])->middleware('can:viewAny,App\Models\Disaggregation');
+        Route::get('indicators/{indicator}/collected_data', [IndicatorController::class, 'collected_data'])->middleware('can:viewAny,App\Models\CollectedData');
         
-        Route::get('disaggregations', [DisaggregationController::class, 'index']);
-        Route::post('disaggregations', [DisaggregationController::class, 'store']);
-        Route::put('disaggregations/{disaggregation}', [DisaggregationController::class, 'update']);
-        Route::delete('disaggregations/{disaggregation}', [DisaggregationController::class, 'destroy']); 
+        Route::get('disaggregations', [DisaggregationController::class, 'index'])->middleware('can:viewAny,App\Models\Disaggregation');
+        Route::post('disaggregations', [DisaggregationController::class, 'store'])->middleware('can:create,App\Models\Disaggregation');
+        Route::put('disaggregations/{disaggregation}', [DisaggregationController::class, 'update'])->middleware('can:update,disaggregation');
+        Route::delete('disaggregations/{disaggregation}', [DisaggregationController::class, 'destroy'])->middleware('can:delete,disaggregation'); 
         
-        Route::post('indicator_disaggregations', [IndicatorDisaggregationController::class, 'store']); 
-        Route::delete('indicator_disaggregations/{indicator_disaggregation}', [IndicatorDisaggregationController::class, 'destroy']); 
+        Route::post('indicator_disaggregations', [IndicatorDisaggregationController::class, 'store'])->middleware('can:create,App\Models\IndicatorDisaggregation'); 
+        Route::delete('indicator_disaggregations/{indicator_disaggregation}', [IndicatorDisaggregationController::class, 'destroy'])->middleware('can:delete,indicator_disaggregation'); 
        
-        Route::get('collected_data', [CollectedDataController::class, 'index']);
-        Route::post('collected_data', [CollectedDataController::class, 'store']);
-        Route::post('collected_data/{collected_data}', [CollectedDataController::class, 'update']);
-        Route::delete('collected_data/{collected_data}', [CollectedDataController::class, 'destroy']); 
+        Route::get('collected_data', [CollectedDataController::class, 'index'])->middleware('can:viewAny,App\Models\CollectedData');
+        Route::post('collected_data', [CollectedDataController::class, 'store'])->middleware('can:create,App\Models\CollectedData');
+        Route::post('collected_data/{collected_data}', [CollectedDataController::class, 'update'])->middleware('can:update,collected_data');
+        Route::delete('collected_data/{collected_data}', [CollectedDataController::class, 'destroy'])->middleware('can:delete,collected_data'); 
         
 
         Route::any('test', function () {
-            return response()->json(['status' => 'ok'], 200);
+            return response()->json(["status" => "ok"], 200);
         });
         // ->middleware('can:create,App\Models\Post');
     });

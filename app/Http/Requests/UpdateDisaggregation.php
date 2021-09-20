@@ -27,7 +27,7 @@ class UpdateDisaggregation extends FormRequest
             'type' => 'required|string',
             'availability' => 'string|required',
             'fields' => 'json|required',
-            'indicator_id' => 'integer|required'
+            'indicator_id' => 'integer|required|exists:indicators,id'
         ];
     }
 

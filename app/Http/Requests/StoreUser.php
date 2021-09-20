@@ -30,7 +30,7 @@ class StoreUser extends FormRequest
             'email' => 'required|email|unique:users',
             'permissions' => 'json',
             'password' => 'required|string|min:8',
-            'role_id' => 'required|integer'
+            'role_id' => 'required|integer|exists:roles,id'
         ];
     }
 

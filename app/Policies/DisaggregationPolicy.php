@@ -10,6 +10,8 @@ class DisaggregationPolicy
 {
     use HandlesAuthorization;
 
+    const MODEL = "disaggregations";
+
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +20,7 @@ class DisaggregationPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return in_array("view-any-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -30,7 +32,7 @@ class DisaggregationPolicy
      */
     public function view(User $user, Disaggregation $disaggregation)
     {
-        //
+        return in_array("view-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -41,7 +43,7 @@ class DisaggregationPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array("create-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -53,7 +55,7 @@ class DisaggregationPolicy
      */
     public function update(User $user, Disaggregation $disaggregation)
     {
-        //
+        return in_array("update-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -65,7 +67,7 @@ class DisaggregationPolicy
      */
     public function delete(User $user, Disaggregation $disaggregation)
     {
-        //
+        return in_array("delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -77,7 +79,7 @@ class DisaggregationPolicy
      */
     public function restore(User $user, Disaggregation $disaggregation)
     {
-        //
+        return in_array("restore-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -89,6 +91,6 @@ class DisaggregationPolicy
      */
     public function forceDelete(User $user, Disaggregation $disaggregation)
     {
-        //
+        return in_array("force-delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 }

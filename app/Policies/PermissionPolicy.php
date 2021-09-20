@@ -2,15 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\Activity;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ActivityPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
-    const MODEL = "activities";
+    const MODEL = "permissions";
+
     /**
      * Determine whether the user can view any models.
      *
@@ -26,10 +27,10 @@ class ActivityPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\Permission  $permission
      * @return mixed
      */
-    public function view(User $user, Activity $activity)
+    public function view(User $user, Permission $permission)
     {
         return in_array("view-" . self::MODEL, json_decode($user->role->permissions));
     }
@@ -49,10 +50,10 @@ class ActivityPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\Permission  $permission
      * @return mixed
      */
-    public function update(User $user, Activity $activity)
+    public function update(User $user, Permission $permission)
     {
         return in_array("update-" . self::MODEL, json_decode($user->role->permissions));
     }
@@ -61,10 +62,10 @@ class ActivityPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\Permission  $permission
      * @return mixed
      */
-    public function delete(User $user, Activity $activity)
+    public function delete(User $user, Permission $permission)
     {
         return in_array("delete-" . self::MODEL, json_decode($user->role->permissions));
     }
@@ -73,10 +74,10 @@ class ActivityPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\Permission  $permission
      * @return mixed
      */
-    public function restore(User $user, Activity $activity)
+    public function restore(User $user, Permission $permission)
     {
         return in_array("restore-" . self::MODEL, json_decode($user->role->permissions));
     }
@@ -85,10 +86,10 @@ class ActivityPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\Permission  $permission
      * @return mixed
      */
-    public function forceDelete(User $user, Activity $activity)
+    public function forceDelete(User $user, Permission $permission)
     {
         return in_array("force-delete-" . self::MODEL, json_decode($user->role->permissions));
     }

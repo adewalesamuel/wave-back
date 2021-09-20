@@ -11,6 +11,9 @@ class ProjectMemberController extends Controller
     public function store(StoreProjectMemberRequest $request) {
         $data = $request->validated();
 
+        if (ProjectMember::where('project_id', $data['project_id'])->where('user_id', $data['user_id'])->exists())
+            throw new \Exception("The project member already exist", 1);
+            
         $project_member = new ProjectMember;
         
         $project_member->project_id = $data['project_id'] ?? null;

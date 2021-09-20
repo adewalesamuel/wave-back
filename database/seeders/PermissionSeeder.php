@@ -136,26 +136,50 @@ class PermissionSeeder extends Seeder
               
               ],
               [
-                'name' => 'Create Disagregations',
-                'slug' => 'create-disagregations',
+                'name' => 'Create Disaggregations',
+                'slug' => 'create-disaggregations',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
-                'name' => 'View Any Disagregations',
-                'slug' => 'view-any-disagregations',
+                'name' => 'View Any Disaggregations',
+                'slug' => 'view-any-disaggregations',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
-                'name' => 'Update Disagregations',
-                'slug' => 'update-disagregations',
+                'name' => 'Update Disaggregations',
+                'slug' => 'update-disaggregations',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
-                'name' => 'Delete Disagregations',
-                'slug' => 'delete-disagregations',
+                'name' => 'Delete Disaggregations',
+                'slug' => 'delete-disaggregations',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Create Indicator Disaggregations',
+                'slug' => 'create-indicator-disaggregations',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'View Any Indicator Disaggregations',
+                'slug' => 'view-any-indicator-disaggregations',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Update Indicator Disaggregations',
+                'slug' => 'update-indicator-disaggregations',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Delete Indicator Disaggregations',
+                'slug' => 'delete-indicator-disaggregations',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
@@ -209,25 +233,25 @@ class PermissionSeeder extends Seeder
               ],
               [
                 'name' => 'Create Comment',
-                'slug' => 'create-comment',
+                'slug' => 'create-comments',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
                 'name' => 'View Any Comment',
-                'slug' => 'view-any-comment',
+                'slug' => 'view-any-comments',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
                 'name' => 'Update Comment',
-                'slug' => 'update-comment',
+                'slug' => 'update-comments',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ],
               [
                 'name' => 'Delete Comment',
-                'slug' => 'delete-comment',
+                'slug' => 'delete-comments',
                 'created_at' => date('Y-m-d H:i:s') 
               
               ]              

@@ -24,8 +24,8 @@ class UpdateIndicatorDisaggregation extends FormRequest
     public function rules()
     {
         return [
-            'indicator_id' => 'required|integer|exists:indicators',
-            'disaggregation_id' => 'required|integer|exists:indicators',
+            'indicator_id' => 'required|integer|exists:indicators,id',
+            'disaggregation_id' => 'required|integer|exists:disaggregations,id',
         ];
     }
 

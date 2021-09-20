@@ -10,6 +10,8 @@ class IndicatorPolicy
 {
     use HandlesAuthorization;
 
+    const MODEL = "indicators";
+
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +20,7 @@ class IndicatorPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return in_array("view-any-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -30,7 +32,7 @@ class IndicatorPolicy
      */
     public function view(User $user, Indicator $indicator)
     {
-        //
+        return in_array("view-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -41,7 +43,7 @@ class IndicatorPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array("create-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -53,7 +55,7 @@ class IndicatorPolicy
      */
     public function update(User $user, Indicator $indicator)
     {
-        //
+        return in_array("update-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -65,7 +67,7 @@ class IndicatorPolicy
      */
     public function delete(User $user, Indicator $indicator)
     {
-        //
+        return in_array("delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -77,7 +79,7 @@ class IndicatorPolicy
      */
     public function restore(User $user, Indicator $indicator)
     {
-        //
+        return in_array("restore-" . self::MODEL, json_decode($user->role->permissions));
     }
 
     /**
@@ -89,6 +91,6 @@ class IndicatorPolicy
      */
     public function forceDelete(User $user, Indicator $indicator)
     {
-        //
+        return in_array("force-delete-" . self::MODEL, json_decode($user->role->permissions));
     }
 }

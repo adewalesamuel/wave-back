@@ -44,8 +44,8 @@ class Activity extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function indicators()
+    public function indicator()
     {
-        return $this->hasMany(Indicator::class);
+        return $this->hasOne(Indicator::class);
     }
 }
