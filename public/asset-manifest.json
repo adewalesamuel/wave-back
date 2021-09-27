@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dfceffee.chunk.css",
+    "main.js": "/static/js/main.987d9f4b.chunk.js",
+    "main.js.map": "/static/js/main.987d9f4b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.45a0f33b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.45a0f33b.js.map",
+    "static/js/2.1b621340.chunk.js": "/static/js/2.1b621340.chunk.js",
+    "static/js/2.1b621340.chunk.js.map": "/static/js/2.1b621340.chunk.js.map",
+    "static/js/3.69b88d9a.chunk.js": "/static/js/3.69b88d9a.chunk.js",
+    "static/js/3.69b88d9a.chunk.js.map": "/static/js/3.69b88d9a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.dfceffee.chunk.css.map": "/static/css/main.dfceffee.chunk.css.map",
+    "static/js/2.1b621340.chunk.js.LICENSE.txt": "/static/js/2.1b621340.chunk.js.LICENSE.txt",
+    "static/media/vendors.min.css": "/static/media/zw.c4e35881.svg",
+    "static/media/dark-layout.css": "/static/media/auth-bg-dark.a5f05768.jpg",
+    "static/media/components.css": "/static/media/auth-bg.c08b14b9.jpg",
+    "static/media/forgot-password.5391e189.png": "/static/media/forgot-password.5391e189.png",
+    "static/media/login.777363db.png": "/static/media/login.777363db.png",
+    "static/media/reset-password.c89ad7fd.png": "/static/media/reset-password.c89ad7fd.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.45a0f33b.js",
+    "static/js/2.1b621340.chunk.js",
+    "static/css/main.dfceffee.chunk.css",
+    "static/js/main.987d9f4b.chunk.js"
+  ]
+}

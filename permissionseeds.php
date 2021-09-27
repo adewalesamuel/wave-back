@@ -119,6 +119,30 @@
 
 ],
 [
+  'name' => 'Create Indicator Disaggregations',
+  'slug' => 'create-indicator-disaggregations',
+  'created_at' => date('Y-m-d H:i:s') 
+
+],
+[
+  'name' => 'View Any Indicator Disaggregations',
+  'slug' => 'view-any-indicator-disaggregations',
+  'created_at' => date('Y-m-d H:i:s') 
+
+],
+[
+  'name' => 'Update Indicator Disaggregations',
+  'slug' => 'update-indicator-disaggregations',
+  'created_at' => date('Y-m-d H:i:s') 
+
+],
+[
+  'name' => 'Delete Indicator Disaggregations',
+  'slug' => 'delete-indicator-disaggregations',
+  'created_at' => date('Y-m-d H:i:s') 
+
+],
+[
   'name' => 'Create Disagregations',
   'slug' => 'create-disagregations',
   'created_at' => date('Y-m-d H:i:s') 
@@ -191,26 +215,26 @@
 
 ],
 [
-  'name' => 'Create Comment',
-  'slug' => 'create-comment',
+  'name' => 'Create Comments',
+  'slug' => 'create-comments',
   'created_at' => date('Y-m-d H:i:s') 
 
 ],
 [
-  'name' => 'View Any Comment',
-  'slug' => 'view-any-comment',
+  'name' => 'View Any Comments',
+  'slug' => 'view-any-comments',
   'created_at' => date('Y-m-d H:i:s') 
 
 ],
 [
-  'name' => 'Update Comment',
-  'slug' => 'update-comment',
+  'name' => 'Update Comments',
+  'slug' => 'update-comments',
   'created_at' => date('Y-m-d H:i:s') 
 
 ],
 [
-  'name' => 'Delete Comment',
-  'slug' => 'delete-comment',
+  'name' => 'Delete Comments',
+  'slug' => 'delete-comments',
   'created_at' => date('Y-m-d H:i:s') 
 
 ],
