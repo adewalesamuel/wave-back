@@ -58,7 +58,7 @@ class CollectedDataController extends Controller
         $collected_data->indicator_id = $data['indicator_id'] ?? null;
         
         if ($request->collected_data_file)
-            $collected_data->file_url = $request->collected_data_file->store('public/files');
+            $collected_data->file_url = $request->collected_data_file->store("files","public");
 
         $collected_data->save();
 

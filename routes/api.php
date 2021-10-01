@@ -61,6 +61,7 @@ Route::name('api.')->group(function() {
         Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
         
         Route::get('projects', [ProjectController::class, 'index'])->middleware('can:viewAny,App\Models\Project');
+        Route::get('projects/{project}', [ProjectController::class, 'show'])->middleware('can:viewAny,App\Models\Project');
         Route::post('projects', [ProjectController::class, 'store'])->middleware('can:create,App\Models\Project');
         Route::put('projects/{project}', [ProjectController::class, 'update'])->middleware('can:update,project');
         Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->middleware('can:delete,project');
