@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectMember;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectMember as StoreProjectMemberRequest;
 
@@ -25,7 +26,8 @@ class ProjectMemberController extends Controller
         $data = [
             'success' => true,
             'data' => [
-                'project_member' => $project_member
+                'project_member' => $project_member,
+                'user' => User::where('id', $data['user_id'])->first()
                 ]
             ];
 
