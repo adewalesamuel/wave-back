@@ -26,8 +26,12 @@ class ProjectMemberController extends Controller
         $data = [
             'success' => true,
             'data' => [
-                'project_member' => $project_member,
-                'user' => User::where('id', $data['user_id'])->first()
+                'project_member' => [
+                    'id' => $project_member->id,
+                    'user_id' => $project_member->user_id,
+                    'created_by' => $project_member->created_by,
+                    'user' => $project_member->user
+                    ]
                 ]
             ];
 
