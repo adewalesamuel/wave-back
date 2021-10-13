@@ -31,8 +31,7 @@ class StoreActivity extends FormRequest
             'end_date' => 'date|required',
             'amount_spent' => 'integer',
             'budget' => 'integer',
-            'activity_id' => 'integer',
-            'user_id' => 'integer|exists:user,id',
+            'user_id' => 'integer|exists:users,id',
             'project_id' => 'required|integer|exists:projects,id'
         ];
     }

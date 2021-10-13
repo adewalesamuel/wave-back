@@ -97,7 +97,7 @@ class ActivityController extends Controller
         $activity->amount_spent = $data['amount_spent'] ?? null;
         $activity->user_id = $data['user_id'] ?? null;
         $activity->project_id = $data['project_id'];
-        $activity->activity_id = $data['activity_id'] ?? null;
+        $activity->activity_id = $request->activity_id ?? null;
         $activity->created_by = auth('api')->user()->id;
         
         $activity->save();

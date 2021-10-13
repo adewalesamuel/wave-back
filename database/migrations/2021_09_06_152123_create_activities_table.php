@@ -27,7 +27,7 @@ class CreateActivitiesTable extends Migration
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('activity_id')->nullable();
-            $table->bigInteger('user_id')
+            $table->foreignId('user_id')
             ->nullable()
             ->constrained()
             ->nullOnDelete();
