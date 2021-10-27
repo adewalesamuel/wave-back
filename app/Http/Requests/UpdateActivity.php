@@ -31,7 +31,7 @@ class UpdateActivity extends FormRequest
             'end_date' => 'date|required',
             'amount_spent' => 'integer',
             'budget' => 'integer',
-            'activity_id' => 'integer',
+            'activity_id' => '',
             'user_id' => 'integer',
             'project_id' => 'required|integer|exists:projects,id'
         ];

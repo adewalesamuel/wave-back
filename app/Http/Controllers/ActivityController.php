@@ -120,7 +120,14 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        $data = [
+            'success' => true,
+            'data' => [
+                'activity' => $activity
+                ]
+            ];
+
+        return response()->json($data, 200);
     }
 
     /**

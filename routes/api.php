@@ -73,6 +73,7 @@ Route::name('api.')->group(function() {
         Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy'])->middleware('can:delete,project_member');
         
         Route::get('activities', [ActivityController::class, 'index'])->middleware('can:viewAny,App\Models\Activity');
+        Route::get('activities/{activity}', [ActivityController::class, 'show'])->middleware('can:viewAny,App\Models\Activity');
         Route::post('activities', [ActivityController::class, 'store'])->middleware('can:create,App\Models\Activity');
         Route::put('activities/{activity}', [ActivityController::class, 'update'])->middleware('can:update,activity');
         Route::delete('activities/{activity}', [ActivityController::class, 'destroy'])->middleware('can:delete,activity');
