@@ -26,7 +26,7 @@ class UpdateUser extends FormRequest
         return [
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-            'tel' => 'string',
+            'tel' => '',
             'email' => 'required|email',
             'permissions' => 'json',
             'password' => 'required|string|min:8',

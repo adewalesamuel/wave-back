@@ -25,7 +25,7 @@ class StoreCollectedData extends FormRequest
     {
         return [
             'values' => 'required|string',
-            'notes' => 'string',
+            'notes' => '',
             'file_name' => 'required|string|unique:collected_data',
             'collected_data_file' => 'mimes:pdf,csv,doc,xml,docx,txt,ppt,pptx,odf,odt,html,xls,xlsx,jpg,mp4,mp3,jpeg,png,gif,zip,rar,avi,mov,flv,wav',
             'collection_date' => 'required|date',

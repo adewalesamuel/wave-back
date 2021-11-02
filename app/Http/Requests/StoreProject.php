@@ -25,7 +25,7 @@ class StoreProject extends FormRequest
     {
         return [
             'name' => 'required|string|unique:projects',
-            'description' => 'string',
+            'description' => '',
             'countries' => 'json',
             'status' => 'string',
             'start_date' => 'date|required',

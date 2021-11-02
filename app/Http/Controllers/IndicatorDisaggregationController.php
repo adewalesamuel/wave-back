@@ -25,7 +25,12 @@ class IndicatorDisaggregationController extends Controller
         $data = [
             'success' => true,
             'data' => [
-                'indicator_disaggregation' => $indicator_disaggregation
+                'indicator_disaggregation' => [
+                    'id' => $indicator_disaggregation->id,
+                    'disaggregation' => $indicator_disaggregation->disaggregation,
+                    'indicator_id' => $indicator_disaggregation->indicator_id,
+                    'created_by' => $indicator_disaggregation->created_by,
+                ]
                 ]
             ];
 

@@ -20,13 +20,13 @@ class CreateIndicatorsTable extends Migration
             $table->enum('type', ['number', 'percentage'])->default('number');
             $table->enum('direction', ['increasing', 'decreasing'])->default('increasing');
             $table->bigInteger('baseline')->nullable();
-            $table->bigInteger('target')->nullable();
+            $table->bigInteger('target')->nullable();   
             $table->string('unit')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
-            $table->foreignId('activity_id')
+            $table->foreignId('project_id')
             ->constrained() 
             ->onDelete('cascade');
         });

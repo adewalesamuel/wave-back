@@ -25,7 +25,7 @@ class UpdateProject extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'string',
+            'description' => '',
             'countries' => 'json',
             'status' => 'string',
             'start_date' => 'date|required',

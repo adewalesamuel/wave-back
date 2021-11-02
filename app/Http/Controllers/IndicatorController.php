@@ -95,7 +95,7 @@ class IndicatorController extends Controller
         $indicator->baseline = $data['baseline'] ?? null;
         $indicator->target = $data['target'] ?? null;
         $indicator->unit = $data['unit'] ?? null;
-        $indicator->activity_id = $data['activity_id'];
+        $indicator->project_id = $data['project_id'];
         $indicator->created_by = auth('api')->user()->id;
             
         $indicator->save();
@@ -118,7 +118,14 @@ class IndicatorController extends Controller
      */
     public function show(Indicator $indicator)
     {
-        //
+        $data = [
+            'success' => true,
+            'data' => [
+                'indicator' => $indicator
+                ]
+            ];
+
+        return response()->json($data);
     }
 
     /**
@@ -150,7 +157,7 @@ class IndicatorController extends Controller
         $indicator->baseline = $data['baseline'] ?? null;
         $indicator->target = $data['target'] ?? null;
         $indicator->unit = $data['unit'] ?? null;
-        $indicator->activity_id = $data['activity_id'];
+        $indicator->project_id = $data['project_id'];
         $indicator->updated_by = auth('api')->user()->id;
             
         $indicator->save();

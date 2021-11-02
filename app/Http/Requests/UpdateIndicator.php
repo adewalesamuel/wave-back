@@ -25,13 +25,13 @@ class UpdateIndicator extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'string',
+            'description' => '',
             'type' => 'string',
             'direction' => 'string',
             'baseline' => 'integer',
             'target' => 'integer',
-            'unit' => 'integer',
-            'activity_id' => 'integer|required|exists:activities,id|unique:indicators',
+            'unit' => 'string',
+            'project_id' => 'integer|required|exists:projects,id',
         ];
     }
 
@@ -43,8 +43,8 @@ class UpdateIndicator extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'An indicatore name is required',
-            'activity_id.required' => 'An activity is required',
+            'name.required' => 'An indicator name is required',
+            'project_id.required' => 'A project is required',
         ];
     }
 }

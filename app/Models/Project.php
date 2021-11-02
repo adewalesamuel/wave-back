@@ -34,4 +34,14 @@ class Project extends Model
     {
         return $this->hasMany(Activity::class);
     }
+  
+    /**
+     * Get all of the indicators for the Project
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function indicators()
+    {
+        return $this->hasMany(Indicator::class);
+    }
 }

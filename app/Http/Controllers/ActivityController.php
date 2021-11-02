@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Indicator;
+use App\Models\ActivityIndicator;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreActivity as StoreActivityRequest;
 use App\Http\Requests\UpdateActivity as UpdateActivityRequest;
@@ -19,8 +20,8 @@ class ActivityController extends Controller
     public function index()
     {   
 
-        $parent_activities = Activity::whereNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
-        $child_activities = Activity::whereNotNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
+        $parent_activities = Activity::whereNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $child_activities = Activity::whereNotNull('activity_id')->orderBy('created_at', 'desc')->get();
         $activities = [];
 
         foreach ($parent_activities as $key => $value) {
@@ -54,16 +55,21 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indicator(Request $request, Activity $activity)
+    public function indicators(Request $request, Activity $activity)
     {   
+        
+        $activity_indicators = ActivityIndicator::with('indicator')
+        ->where('activity_id', $activity->id)->get();
+
         $data = [
             'success' => true,
             'data' => [
-                'indicators' => $activity->indicator
+                'activity_indicators' => $activity_indicators
                 ]
             ];
 
         return response()->json($data, 200);
+    
     }
 
     /**

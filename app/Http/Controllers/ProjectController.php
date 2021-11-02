@@ -57,8 +57,8 @@ class ProjectController extends Controller
      */
     public function activities(Request $request, Project $project)
     {
-        $parent_activities = Activity::where('project_id', $project->id)->whereNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
-        $child_activities = Activity::where('project_id', $project->id)->whereNotNull('activity_id')->with('indicator')->orderBy('created_at', 'desc')->get();
+        $parent_activities = Activity::where('project_id', $project->id)->whereNull('activity_id')->orderBy('created_at', 'desc')->get();
+        $child_activities = Activity::where('project_id', $project->id)->whereNotNull('activity_id')->orderBy('created_at', 'desc')->get();
         $activities = [];
 
         foreach ($parent_activities as $key => $value) {
@@ -67,7 +67,7 @@ class ProjectController extends Controller
 
             foreach ($child_activities as $key => $value) {
                 $child_activity = $value;
-                if ($parent_activity['id'] === $child_activity['activity_id']) {
+                if ($parent_activity['id'] === $child_activity['activity_id']) {    
                     $children[] = $child_activity;
                 }
             }
@@ -93,15 +93,10 @@ class ProjectController extends Controller
      */
     public function indicators(Request $request, Project $project)
     {   
-        $activities_id = $project->activities->map(function($activity) {
-            return $activity->id;
-        });
-        $indicators = Indicator::whereIn('activity_id', $activities_id)->get();
-
         $data = [
             'success' => true,
             'data' => [
-                'indicators' => $indicators
+                'indicators' => $project->indicators
                 ]
             ];
 

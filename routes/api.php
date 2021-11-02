@@ -16,6 +16,7 @@ use App\Http\Controllers\DisaggregationController;
 use App\Http\Controllers\IndicatorDisaggregationController;
 use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\CollectedDataController;
+use App\Http\Controllers\ActivityIndicatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,8 +78,10 @@ Route::name('api.')->group(function() {
         Route::post('activities', [ActivityController::class, 'store'])->middleware('can:create,App\Models\Activity');
         Route::put('activities/{activity}', [ActivityController::class, 'update'])->middleware('can:update,activity');
         Route::delete('activities/{activity}', [ActivityController::class, 'destroy'])->middleware('can:delete,activity');
+        Route::get('activities/{activity}/indicators', [ActivityController::class, 'indicators'])->middleware('can:viewAny,App\Models\Indicator');
         
         Route::get('indicators', [IndicatorController::class, 'index'])->middleware('can:viewAny,App\Models\Indicator');
+        Route::get('indicators/{indicator}', [IndicatorController::class, 'show'])->middleware('can:viewAny,App\Models\Indicator');
         Route::post('indicators', [IndicatorController::class, 'store'])->middleware('can:create,App\Models\Indicator');
         Route::put('indicators/{indicator}', [IndicatorController::class, 'update'])->middleware('can:update,indicator');
         Route::delete('indicators/{indicator}', [IndicatorController::class, 'destroy'])->middleware('can:delete,indicator'); 
@@ -98,6 +101,8 @@ Route::name('api.')->group(function() {
         Route::post('collected_data/{collected_data}', [CollectedDataController::class, 'update'])->middleware('can:update,collected_data');
         Route::delete('collected_data/{collected_data}', [CollectedDataController::class, 'destroy'])->middleware('can:delete,collected_data'); 
         
+        Route::post('activity_indicators', [ActivityIndicatorController::class, 'store']);
+        Route::delete('activity_indicators/{activity_indicator}', [ActivityIndicatorController::class, 'destroy']);
 
         Route::any('test', function () {
             return response()->json(["status" => "ok"], 200);

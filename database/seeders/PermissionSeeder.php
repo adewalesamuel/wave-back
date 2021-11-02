@@ -254,7 +254,31 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-comments',
                 'created_at' => date('Y-m-d H:i:s') 
               
-              ]              
+              ],
+              [
+                'name' => 'Create Activity Indicators',
+                'slug' => 'create-activity-indicators',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'View Any Activity Indicators',
+                'slug' => 'view-any-activity-indicators',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Update Activity Indicators',
+                'slug' => 'update-activity-indicators',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Delete Activity Indicators',
+                'slug' => 'delete-activity-indicators',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ]           
         ]
         );
     }
