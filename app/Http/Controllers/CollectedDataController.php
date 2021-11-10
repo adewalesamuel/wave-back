@@ -57,7 +57,7 @@ class CollectedDataController extends Controller
         $collected_data->created_by = auth('api')->user()->id;
         $collected_data->indicator_id = $data['indicator_id'] ?? null;
         
-        if ($request->collected_data_file)
+        if ($request->hasFile('collected_data_file'))
             $collected_data->file_url = $request->collected_data_file->store("files","public");
 
         $collected_data->save();

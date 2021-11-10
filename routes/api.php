@@ -17,6 +17,7 @@ use App\Http\Controllers\IndicatorDisaggregationController;
 use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\CollectedDataController;
 use App\Http\Controllers\ActivityIndicatorController;
+use App\Http\Controllers\GraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,11 @@ Route::name('api.')->group(function() {
         Route::post('collected_data', [CollectedDataController::class, 'store'])->middleware('can:create,App\Models\CollectedData');
         Route::post('collected_data/{collected_data}', [CollectedDataController::class, 'update'])->middleware('can:update,collected_data');
         Route::delete('collected_data/{collected_data}', [CollectedDataController::class, 'destroy'])->middleware('can:delete,collected_data'); 
+        
+        Route::get('graphs', [GraphController::class, 'index']);
+        Route::post('graphs', [GraphController::class, 'store']);
+        Route::put('graphs/{graph}', [GraphController::class, 'update']);
+        Route::delete('graphs/{graph}', [GraphController::class, 'destroy']); 
         
         Route::post('activity_indicators', [ActivityIndicatorController::class, 'store']);
         Route::delete('activity_indicators/{activity_indicator}', [ActivityIndicatorController::class, 'destroy']);

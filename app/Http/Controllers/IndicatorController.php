@@ -56,10 +56,13 @@ class IndicatorController extends Controller
      */
     public function collected_data(Request $request, Indicator $indicator)
     {
+        $indicator_collected_data = CollectedData::where('indicator_id', $indicator->id)
+        ->orderBy('created_at', 'desc')->get();
+
         $data = [
             'success' => true,
             'data' => [
-                'indicator_collected_data' => $indicator->collected_data->SortByDesc('created_at')
+                'indicator_collected_data' => $indicator_collected_data
                 ]
             ];
 

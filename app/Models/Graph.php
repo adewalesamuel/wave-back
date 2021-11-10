@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CollectedData extends Model
+class Graph extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,22 +16,21 @@ class CollectedData extends Model
      * @var array
      */
     protected $fillable = [
-        'values', 
-        'notes',
-        'collection_date',
-        'file_name',
-        'file_url',
-        'disaggregation_values',
-        'indicator_id',
+        'name',
+        'description',
+        'type',
+        'indicators',
+        'project_id'
     ];
 
     /**
-     * Get the indicator that owns the CollectedData
+     * Get the project that owns the Graph
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function indicator()
+    public function project()
     {
-        return $this->belongsTo(Indicator::class);
+        return $this->belongsTo(Project::class);
     }
 }
+

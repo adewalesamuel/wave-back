@@ -278,7 +278,31 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-activity-indicators',
                 'created_at' => date('Y-m-d H:i:s') 
               
-              ]           
+              ],
+              [
+                'name' => 'Create Graphs',
+                'slug' => 'create-graphs',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'View Any Graphs',
+                'slug' => 'view-any-graphs',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Update Graphs',
+                'slug' => 'update-graphs',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Delete Graphs',
+                'slug' => 'delete-graphs',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ]            
         ]
         );
     }
