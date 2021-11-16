@@ -7,6 +7,7 @@ use App\Models\Indicator;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGraph as StoreGraphRequest;
 use App\Http\Requests\UpdateGraph as UpdateGraphRequest;
+use Illuminate\Support\Facades\DB;
 
 class GraphController extends Controller
 {
@@ -20,6 +21,9 @@ class GraphController extends Controller
         $graphs = Graph::where('project_id', $request->query('project_id'))
         ->orderBy('created_at', 'desc')->get();
         $indicator_ids = [];
+        $project = DB::table('activities')
+        ->select(DB::raw("SUM(budget) as budget, SUM(amount_spent) as amount_spent"))
+        ->where('project_id', $request->query('project_id'))->first();
 
         foreach ($graphs as  $graph) {
             $indicator_ids[] = json_decode($graph->indicators)[0];
@@ -38,7 +42,8 @@ class GraphController extends Controller
         $data = [
             "success" => true,
             "data" => [
-                "graphs" => $graphs
+                "graphs" => $graphs,
+                "project_info" => $project
                 ]
             ];
 
