@@ -23,6 +23,7 @@ class GraphController extends Controller
         $indicator_ids = [];
         $project = DB::table('activities')
         ->select(DB::raw("SUM(budget) as budget, SUM(amount_spent) as amount_spent"))
+        ->where('deleted_at', null)
         ->where('project_id', $request->query('project_id'))->first();
 
         foreach ($graphs as  $graph) {
