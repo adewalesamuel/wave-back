@@ -1,28 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.71624182.chunk.css",
-    "main.js": "/static/js/main.a0b80316.chunk.js",
-    "main.js.map": "/static/js/main.a0b80316.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.8a3a5d64.js",
-    "runtime-main.js.map": "/static/js/runtime-main.8a3a5d64.js.map",
-    "static/js/2.2fc8e1d7.chunk.js": "/static/js/2.2fc8e1d7.chunk.js",
-    "static/js/2.2fc8e1d7.chunk.js.map": "/static/js/2.2fc8e1d7.chunk.js.map",
-    "static/js/3.f88196ce.chunk.js": "/static/js/3.f88196ce.chunk.js",
-    "static/js/3.f88196ce.chunk.js.map": "/static/js/3.f88196ce.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.71624182.chunk.css.map": "/static/css/main.71624182.chunk.css.map",
-    "static/js/2.2fc8e1d7.chunk.js.LICENSE.txt": "/static/js/2.2fc8e1d7.chunk.js.LICENSE.txt",
-    "static/media/vendors.min.css": "/static/media/zw.c4e35881.svg",
-    "static/media/dark-layout.css": "/static/media/auth-bg-dark.a5f05768.jpg",
-    "static/media/components.css": "/static/media/auth-bg.c08b14b9.jpg",
-    "static/media/forgot-password.5391e189.png": "/static/media/forgot-password.5391e189.png",
-    "static/media/login.777363db.png": "/static/media/login.777363db.png",
-    "static/media/reset-password.c89ad7fd.png": "/static/media/reset-password.c89ad7fd.png"
+    "main.css": "./static/css/main.9b6b63a9.chunk.css",
+    "main.js": "./static/js/main.c76a0cfa.chunk.js",
+    "main.js.map": "./static/js/main.c76a0cfa.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.e4af549f.js",
+    "runtime-main.js.map": "./static/js/runtime-main.e4af549f.js.map",
+    "static/js/2.2fc8e1d7.chunk.js": "./static/js/2.2fc8e1d7.chunk.js",
+    "static/js/2.2fc8e1d7.chunk.js.map": "./static/js/2.2fc8e1d7.chunk.js.map",
+    "static/js/3.f88196ce.chunk.js": "./static/js/3.f88196ce.chunk.js",
+    "static/js/3.f88196ce.chunk.js.map": "./static/js/3.f88196ce.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.9b6b63a9.chunk.css.map": "./static/css/main.9b6b63a9.chunk.css.map",
+    "static/js/2.2fc8e1d7.chunk.js.LICENSE.txt": "./static/js/2.2fc8e1d7.chunk.js.LICENSE.txt",
+    "static/media/vendors.min.css": "./static/media/zw.c4e35881.svg",
+    "static/media/dark-layout.css": "./static/media/auth-bg-dark.a5f05768.jpg",
+    "static/media/components.css": "./static/media/auth-bg.c08b14b9.jpg",
+    "static/media/forgot-password.5391e189.png": "./static/media/forgot-password.5391e189.png",
+    "static/media/login.777363db.png": "./static/media/login.777363db.png",
+    "static/media/logo-light.3dafcadb.png": "./static/media/logo-light.3dafcadb.png",
+    "static/media/reset-password.c89ad7fd.png": "./static/media/reset-password.c89ad7fd.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.8a3a5d64.js",
+    "static/js/runtime-main.e4af549f.js",
     "static/js/2.2fc8e1d7.chunk.js",
-    "static/css/main.71624182.chunk.css",
-    "static/js/main.a0b80316.chunk.js"
+    "static/css/main.9b6b63a9.chunk.css",
+    "static/js/main.c76a0cfa.chunk.js"
   ]
 }
