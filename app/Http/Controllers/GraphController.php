@@ -17,15 +17,19 @@ class GraphController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $graphs = Graph::where('project_id', $request->query('project_id'))
+    {   
+        $project_id = $request->query('project_id');
+        $graphs = Graph::where('project_id', $project_id)
         ->orderBy('created_at', 'desc')->get();
         $indicator_ids = [];
-        $project = DB::table('activities')
-        ->select(DB::raw("SUM(budget) as budget, SUM(amount_spent) as amount_spent"))
-        ->where('deleted_at', null)
-        ->where('project_id', $request->query('project_id'))->first();
 
+        $project_info = DB::table('activities')
+        ->select(DB::raw("SUM(budget) as budget, SUM(amount_spent) as amount_spent,
+        COUNT(*) AS activities_all, (SELECT COUNT(*) FROM activities
+        WHERE `project_id` = $project_id AND `status` = 'closed' AND deleted_at IS NULL) AS activities_closed"))
+        ->where('deleted_at', null)
+        ->where('project_id', $project_id)->first();
+        
         foreach ($graphs as  $graph) {
             $indicator_ids[] = json_decode($graph->indicators)[0];
         }
@@ -44,7 +48,7 @@ class GraphController extends Controller
             "success" => true,
             "data" => [
                 "graphs" => $graphs,
-                "project_info" => $project
+                "project_info" => $project_info
                 ]
             ];
 
