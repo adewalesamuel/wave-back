@@ -126,8 +126,8 @@ class ProjectController extends Controller
         $project = new Project;
         
         $project->name = $data['name'];
+        $project->country_id = $data['country_id'];
         $project->description = $data['description'] ?? null;
-        $project->countries = $data['countries'] ?? null;
         $project->status = $data['status'] ?? 'open';
         $project->start_date = $data['start_date'];
         $project->end_date = $data['end_date'];
@@ -186,8 +186,8 @@ class ProjectController extends Controller
         $data = $request->validated();
         
         $project->name = $data['name'];
+        $project->country_id = $data['country_id'];
         $project->description = $data['description'] ?? null;
-        $project->countries = $data['countries'] ?? null;
         $project->status = $data['status'] ?? 'open';
         $project->start_date = $data['start_date'];
         $project->end_date = $data['end_date'];

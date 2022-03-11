@@ -302,7 +302,55 @@ class PermissionSeeder extends Seeder
                 'slug' => 'delete-graphs',
                 'created_at' => date('Y-m-d H:i:s') 
               
-              ]            
+              ], 
+              [
+                'name' => 'Create Countries',
+                'slug' => 'create-countries',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'View Any Countries',
+                'slug' => 'view-any-countries',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Update Countries',
+                'slug' => 'update-countries',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Delete Countries',
+                'slug' => 'delete-countries',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Create Outcomes',
+                'slug' => 'create-outcomes',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'View Any Outcomes',
+                'slug' => 'view-any-outcomes',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Update Outcomes',
+                'slug' => 'update-outcomes',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ],
+              [
+                'name' => 'Delete Outcomes',
+                'slug' => 'delete-outcomes',
+                'created_at' => date('Y-m-d H:i:s') 
+              
+              ]         
         ]
         );
     }

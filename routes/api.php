@@ -18,6 +18,7 @@ use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\CollectedDataController;
 use App\Http\Controllers\ActivityIndicatorController;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ use App\Http\Controllers\GraphController;
 */
 
 Route::name('api.')->group(function() {
+    Route::post('login', [AuthController::class, 'login']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::any('forgot-password', [AuthController::class, 'forgotPassword'])->name('password.forgot');
@@ -73,6 +75,13 @@ Route::name('api.')->group(function() {
         
         Route::post('project_members', [ProjectMemberController::class, 'store'])->middleware('can:create,App\Models\ProjectMember');
         Route::delete('project_members/{project_member}', [ProjectMemberController::class, 'destroy'])->middleware('can:delete,project_member');
+        
+        Route::get('countries', [CountryController::class, 'index'])->middleware('can:viewAny,App\Models\Country');
+        Route::get('countries/{country}', [CountryController::class, 'show'])->middleware('can:viewAny,App\Models\Country');
+        Route::post('countries', [CountryController::class, 'store'])->middleware('can:create,App\Models\Country');
+        Route::put('countries/{country}', [CountryController::class, 'update'])->middleware('can:update,country');
+        Route::delete('countries/{country}', [CountryController::class, 'destroy'])->middleware('can:delete,country');
+        Route::get('countries/{country}/projects', [CountryController::class, 'projects'])->middleware('can:viewAny,App\Models\Project');        
         
         Route::get('activities', [ActivityController::class, 'index'])->middleware('can:viewAny,App\Models\Activity');
         Route::get('activities/{activity}', [ActivityController::class, 'show'])->middleware('can:viewAny,App\Models\Activity');

@@ -44,4 +44,14 @@ class Project extends Model
     {
         return $this->hasMany(Indicator::class);
     }
+
+    /**
+     * Get the country that owns the Project
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
