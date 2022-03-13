@@ -19,4 +19,3 @@ Route::get('/activity_summary', [ActivitySummaryController::class, 'index']);
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');    // Must be at the end
-
