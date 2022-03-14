@@ -105,6 +105,8 @@ class ActivityController extends Controller
         $activity->outcome_id = $data['outcome_id'] ?? null;
         $activity->project_id = $data['project_id'];
         $activity->activity_id = $request->activity_id ?? null;
+        $activity->indicator_id = $request->indicator_id ?? null;
+        $activity->periods = $request->periods ?? null;
         $activity->created_by = auth('api')->user()->id;
         
         $activity->save();
@@ -170,6 +172,8 @@ class ActivityController extends Controller
         $activity->outcome_id = $data['outcome_id'] ?? null;
         $activity->project_id = $data['project_id'];
         $activity->activity_id = $data['activity_id'] ?? null;
+        $activity->indicator_id = $request->indicator_id ?? null;
+        $activity->periods = $request->periods ?? null;
         $activity->updated_by = auth('api')->user()->id;
         
         $activity->save();

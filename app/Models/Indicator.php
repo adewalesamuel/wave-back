@@ -29,11 +29,11 @@ class Indicator extends Model
     /**
      * Get the activity that owns the Indicator
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function activity()
     {
-        return $this->belongsTo(Activity::class);
+        return $this->hasOne(Activity::class);
     }
     
     /**
@@ -55,4 +55,5 @@ class Indicator extends Model
     {
         return $this->hasMany(CollectedData::class);
     }
+
 }

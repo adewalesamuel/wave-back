@@ -10,12 +10,12 @@ use App\Models\Project;
 class ActivitySummaryController extends Controller
 {
     public function index(Request $request) {
-
-        if ($request->query('project_id') == "" || !$request->query('project_id')) {
+        if ($request->query('project_id') == "" || !$request->query('project_id') || 
+        !$request->query('start_year') || !$request->query('end_year') || 
+        !$request->query('start_quarters') || !$request->query('end_quarters')) {
 
             $data = [
                 "error" => true,
-                "message" => "You must specify a project"
             ];
 
             return response()->json($data, 400);
@@ -25,9 +25,37 @@ class ActivitySummaryController extends Controller
         $child_activities = Activity::whereNotNull('activity_id');
         $activities = [];
 
-        if ($request->query('start_date') && $request->query('end_date')) {
-            $parent_activities = $parent_activities->where('start_date', $request->query('start_date'));
-            $child_activities = $child_activities->where('end_date', $request->query('end_date'));
+        $periods = [
+            [
+                "date" => 2022,
+                "periods" => ['q1', "q2"]
+            ],
+            [
+                "date" =>2023,
+                "periods" => ['q1', "q2"]
+            ]
+        ];
+
+        if ($request->query('start_year') && $request->query('end_year')) {
+            $parent_activities = $parent_activities
+            ->whereJsonContains('periods', [
+                "date" => $request->query('start_year'),
+                "quarters" => json_decode($request->query('start_quarters'))
+            ])
+            ->orWhereJsonContains('periods', [
+                "date" => $request->query('end_year'),
+                "quarters" => json_decode($request->query('end_quarters'))
+            ]);
+
+            $child_activities = $child_activities
+            ->whereJsonContains('periods', [
+                "date" => $request->query('start_year'),
+                "quarters" => json_decode($request->query('start_quarters'))
+            ])
+            ->orWhereJsonContains('periods', [
+                "date" => $request->query('end_year'),
+                "quarters" => json_decode($request->query('end_quarters'))
+            ]);
         }
         
         $parent_activities = $parent_activities->orderBy('created_at', 'desc')->get();

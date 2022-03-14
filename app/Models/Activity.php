@@ -26,7 +26,9 @@ class Activity extends Model
         'budget',
         'activity_id',
         'user_id',
-        'project_id'
+        'project_id',
+        'periods',
+        'indicator_id'
     ];
 
     /**
@@ -47,6 +49,16 @@ class Activity extends Model
     public function outcome()
     {
         return $this->belongsTo(Outcome::class);
+    }
+
+    /**
+     * Get the indicator that owns the Activity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function indicator()
+    {
+        return $this->belongsTo(Indicator::class);
     }
 
 }

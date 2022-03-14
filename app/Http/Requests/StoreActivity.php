@@ -34,6 +34,8 @@ class StoreActivity extends FormRequest
             'user_id' => 'integer|exists:users,id',
             'outcome_id' => 'nullable|integer|exists:outcomes,id',
             'project_id' => 'required|integer|exists:projects,id'
+            'indicator_id' => 'nullable|integer|exists:indcators,id',
+            'periods' => 'nullable|json'
         ];
     }
 
