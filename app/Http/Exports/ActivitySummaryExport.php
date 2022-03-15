@@ -4,6 +4,7 @@ namespace App\Http\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use App\Models\Activity;
+use App\Models\Indicator;
 
 class ActivitySummaryExport implements FromView
 {
@@ -24,6 +25,7 @@ class ActivitySummaryExport implements FromView
         $child_activities = Activity::whereNotNull('activity_id');
         $activities = [];
 
+
         if (request()->query('start_year') && request()->query('end_year')) {
             $parent_activities = $parent_activities
             ->whereDate('start_date', ">=", date('Y-m-d', strtotime(request()->query('start_year') . "-01-01")))
@@ -36,6 +38,29 @@ class ActivitySummaryExport implements FromView
         
         $parent_activities = $parent_activities->orderBy('created_at', 'desc')->get();
         $child_activities = $child_activities->orderBy('created_at', 'desc')->get();
+
+        $activities_indicators_ids = [];
+
+        foreach ($parent_activities as $parent_activity) {
+            if ($parent_activity->indicator_id) {
+                $activities_indicators_ids[] = $parent_activity->indicator_id;
+            }
+        }
+
+        foreach ($child_activities as $child_activity) {
+            if ($child_activity->indicator_id) {
+                $activities_indicators_ids[] = $child_activity->indicator_id;
+            }
+        }
+            
+        $indicators = Indicator::whereIn('id', $activities_indicators_ids)->with('collected_data')->get();
+
+        foreach ($indicators as $indicator) {
+            $achieved = $indicator->collected_data->reduce(function($carry, $collected_data) {
+                return $carry + intval($collected_data->values);
+            });
+            $indicator['achieved'] = $achieved;
+        }
 
         foreach ($parent_activities as $key => $value) {
             $parent_activity = $value;
@@ -52,12 +77,28 @@ class ActivitySummaryExport implements FromView
             $activities[] = $parent_activity;
         };
 
+        foreach ($activities as $activitiy) {
+            foreach ($indicators as $indicator) {
+                if ($activitiy->indicator_id == $indicator->id ) {
+                    $activitiy["indicator"] = $indicator;
+                }
+            }
+
+            foreach ($activitiy['children'] as $child_activitiy) {
+                foreach ($indicators as $indicator) {
+                    if ($child_activitiy->indicator_id == $indicator->id ) {
+                        $child_activitiy["indicator"] = $indicator;
+                    }
+                }
+            }
+        }
+
         $data = [
             'activities' => $parent_activities,
             'start_year' => request()->query('start_year'),
             'end_year' => request()->query('end_year')
         ];
 
-        return view('activity_summary', $data);
+        return view('activity_summary', $data); 
     }
 }

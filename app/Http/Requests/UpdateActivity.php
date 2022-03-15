@@ -35,7 +35,7 @@ class UpdateActivity extends FormRequest
             'user_id' => 'integer',
             'outcome_id' => 'nullable|integer|exists:outcomes,id',
             'project_id' => 'required|integer|exists:projects,id',
-            'indicator_id' => 'nullable|integer|exists:indcators,id',
+            'indicator_id' => 'nullable|integer|exists:indicators,id',
             'periods' => 'nullable|json'
         ];
     }

@@ -39,7 +39,8 @@
                         <td style="border-bottom: 1px solid black; border-left: 1px solid black"></td>
                     @endfor
                 <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Note</td>
-                <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Status</td>
+                <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Target</td>
+                <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Actual achieved</td>
                 <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Deadline for completion of activity</td>
                 <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Budget</td>
                 <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-top: 1px solid black">Actual spent</td>
@@ -104,7 +105,10 @@
                     @endfor
 
                     <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->description ?? ""}}</td>
-                    <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->status ?? ""}}</td>
+                    <td style="border-bottom: 1px solid black; border-left: 1px solid black">
+                        {{$activities[$i - 1]->indicator->target ?? ""}} {{$activities[$i - 1]->indicator->unit ?? ""}}
+                    </td>
+                    <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->indicator->achieved ?? ""}}</td>
                     <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->end_date ?? ""}}</td>
                     <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->budget ?? ""}}</td>
                     <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]->amount_spent ?? ""}}</td>
@@ -124,8 +128,10 @@
                             <td style="border-bottom: 1px solid black; border-left: 1px solid black"></td>
                         @endfor
                         <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->description ?? ""}}</td>
-                        <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->status ?? ""}}</td>
-                        <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->end_date ?? ""}}</td>
+                        <td style="border-bottom: 1px solid black; border-left: 1px solid black">
+                            {{$activities[$i - 1]['children'][$j]->indicator->target ?? ""}} {{$activities[$i - 1]['children'][$j]->indicator->unit ?? ""}}
+                        </td>
+                        <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->indicator->achieved ?? ""}}</td>                        <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->end_date ?? ""}}</td>
                         <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->budget ?? ""}}</td>
                         <td style="border-bottom: 1px solid black; border-left: 1px solid black">{{$activities[$i - 1]['children'][$j]->amount_spent ?? ""}}</td>
                     </tr>
