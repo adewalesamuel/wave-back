@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Activity;
-use App\Models\CollectedData;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Exports\ActivitySummaryExport;
 

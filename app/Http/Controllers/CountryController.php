@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCountry as StoreCountryRequest;
 use App\Http\Requests\UpdateCountry as UpdateCountryRequest;
 
