@@ -134,7 +134,7 @@ class GraphController extends Controller
         $graph->type = $data['type'];
         $graph->indicators = $data['indicators'];
         $graph->project_id = $data['project_id'];
-        $project->updated_by = auth('api')->user()->id;
+        $graph->updated_by = auth('api')->user()->id;
             
         $graph->save();
 
