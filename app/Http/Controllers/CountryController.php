@@ -29,7 +29,9 @@ class CountryController extends Controller
     public function projects(Country $country) {
         $data = [
             'success' => true,
-            'projects' => $country->projects->sortByDesc('created_at')
+            'data' => [
+                'projects' => $country->projects->sortByDesc('created_at')->values()->all()
+            ]
         ];
 
         return response()->json($data, 200);

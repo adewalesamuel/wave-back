@@ -58,7 +58,7 @@ class ProjectController extends Controller
     {
         $data = [
             'success' => true,
-            'outcomes' => $project->outcomes->sortByDesc('created_at')
+            'outcomes' => $project->outcomes->sortByDesc('created_at')->values()->all()
         ];
 
         return response()->json($data, 200);
