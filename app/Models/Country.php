@@ -29,4 +29,14 @@ class Country extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    /**
+     * Get all of the users for the Country
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

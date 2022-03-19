@@ -83,6 +83,7 @@ Route::name('api.')->group(function() {
         Route::put('countries/{country}', [CountryController::class, 'update'])->middleware('can:update,country');
         Route::delete('countries/{country}', [CountryController::class, 'destroy'])->middleware('can:delete,country');
         Route::get('countries/{country}/projects', [CountryController::class, 'projects'])->middleware('can:viewAny,App\Models\Project');  
+        Route::get('countries/{country}/users', [CountryController::class, 'users'])->middleware('can:viewAny,App\Models\User');  
         
         Route::get('outcomes', [OutcomeController::class, 'index'])->middleware('can:viewAny,App\Models\Outcome');
         Route::get('outcomes/{outcome}', [OutcomeController::class, 'show'])->middleware('can:viewAny,App\Models\Outcome');

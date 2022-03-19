@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\User;
 use App\Http\Requests\StoreCountry as StoreCountryRequest;
 use App\Http\Requests\UpdateCountry as UpdateCountryRequest;
 
@@ -31,6 +32,19 @@ class CountryController extends Controller
             'success' => true,
             'data' => [
                 'projects' => $country->projects->sortByDesc('created_at')->values()->all()
+            ]
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function users(Country $country) {
+        $users = User::where('country_id', $country->id)->with('role')
+        ->orderBy('created_at', 'desc')->get();
+        $data = [
+            'success' => true,
+            'data' => [
+                'users' => $users
             ]
         ];
 

@@ -14,11 +14,7 @@ class ActivitySummaryExport implements FromView
         if (!request()->query('project_id') || !request()->query('start_year') || 
         !request()->query('end_year') ) {
 
-            $data = [
-                "error" => true,
-            ];
-
-            return response()->json($data, 400);
+            throw new \Exception("Error Processing Request");
         }
 
         $parent_activities = Activity::whereNull('activity_id');
