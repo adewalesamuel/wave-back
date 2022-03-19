@@ -26,7 +26,7 @@ class UpdateOutcome extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'nullable|string',
-            'project_id' => 'required|integer|exists:projects,id'
+            'project_id' => 'nullable|integer|exists:projects,id'
         ];
     }
 }

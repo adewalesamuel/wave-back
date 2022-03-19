@@ -50,7 +50,7 @@ class OutcomeController extends Controller
         $outcome = new Outcome;
         
         $outcome->name = $data['name'];
-        $outcome->project_id = $data['project_id'];
+        $outcome->project_id = $data['project_id'] ?? null;
         $outcome->description = $data['description'] ?? null;
         $outcome->created_by = auth('api')->user()->id;
             
@@ -107,7 +107,7 @@ class OutcomeController extends Controller
         $data = $request->validated();
         
         $outcome->name = $data['name'];
-        $outcome->project_id = $data['project_id'];
+        $outcome->project_id = $data['project_id'] ?? null;
         $outcome->description = $data['description'] ?? null;
         $outcome->updated_by = auth('api')->user()->id;
             

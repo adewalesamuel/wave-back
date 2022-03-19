@@ -26,7 +26,7 @@ class StoreOutcome extends FormRequest
         return [
             'name' => 'required|string|unique:outcomes',
             'description' => 'nullable|string',
-            'project_id' => 'required|integer|exists:projects,id'
+            'project_id' => 'nullable|integer|exists:projects,id'
         ];
     }
 }

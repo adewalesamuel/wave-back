@@ -22,6 +22,7 @@ class CreateOutcomesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->foreignId('project_id')
+            ->nullable()
             ->constrained()
             ->onDelete('cascade');
         });
