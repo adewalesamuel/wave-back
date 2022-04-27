@@ -16,7 +16,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::orderBy('created_at', 'desc')->get();
+        $countries = Country::with('projects')->orderBy('created_at', 'desc')->get();
         $data = [
             'success' => true,
             'data' => [
