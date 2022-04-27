@@ -18,6 +18,8 @@ class CreateCollectedDataTable extends Migration
             $table->string('values');
             $table->string('notes')->nullable();
             $table->date('collection_date');
+            $table->integer('budget')->nullable();
+            $table->integer('amount_spent')->nullable();
             $table->string('file_name')->unique()->nullable();
             $table->string('file_url')->nullable();
             $table->json('disaggregation_values')->nullable();

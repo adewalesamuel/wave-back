@@ -52,6 +52,8 @@ class CollectedDataController extends Controller
         $collected_data->values = $data['values'];
         $collected_data->notes = $data['notes'] ?? null;
         $collected_data->collection_date = $data['collection_date'];
+        $collected_data->budget = $data['budget'] ?? null;
+        $collected_data->amount_spent = $data['amount_spent'] ?? null;
         $collected_data->file_name = $data['file_name'] ?? null;    
         $collected_data->disaggregation_values = $data['disaggregation_values'] ?? null;
         $collected_data->created_by = auth('api')->user()->id;
@@ -108,13 +110,15 @@ class CollectedDataController extends Controller
         $collected_data->values = $data['values'];
         $collected_data->notes = $data['notes'] ?? null;
         $collected_data->collection_date = $data['collection_date'];
+        $collected_data->budget = $data['budget'] ?? null;
+        $collected_data->amount_spent = $data['amount_spent'] ?? null;
         $collected_data->file_name = $data['file_name'] ?? null;    
         $collected_data->disaggregation_values = $data['disaggregation_values'] ?? null;
         $collected_data->created_by = auth('api')->user()->id;
         $collected_data->indicator_id = $data['indicator_id'] ?? null;
-        
-        if ($request->collected_data_file)
-            $collected_data->file_url = $request->collected_data_file->store('public/files');
+
+        if ($request->hasFile('collected_data_file'))
+            $collected_data->file_url = $request->collected_data_file->store("files","public");
 
         $collected_data->save();
 

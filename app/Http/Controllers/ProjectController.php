@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\Activity;
+use App\Models\Indicator;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProject as StoreProjectRequest;
 use App\Http\Requests\UpdateProject as UpdateProjectRequest;
@@ -110,7 +111,8 @@ class ProjectController extends Controller
         $data = [
             'success' => true,
             'data' => [
-                'indicators' => $project->indicators
+                'indicators' => Indicator::where('project_id', $project->id)->with('activity')
+                ->orderBy('created_at', 'desc')->get()
                 ]
             ];
 

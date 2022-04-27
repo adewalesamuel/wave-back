@@ -24,7 +24,7 @@ class StoreProject extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:projects',
+            'name' => 'required|string',
             'description' => '',
             'country_id' => 'required|integer|exists:countries,id',
             'status' => 'string',

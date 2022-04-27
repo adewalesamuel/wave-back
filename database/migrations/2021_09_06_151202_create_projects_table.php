@@ -15,7 +15,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
             $table->json('countries')->nullable();
             $table->enum('status', ['open', 'closed', 'pending'])->default('open');

@@ -60,7 +60,6 @@ Route::name('api.')->group(function() {
         Route::put('comments/{comment}', [CommentController::class, 'update'])->middleware('can:update,comment');
         Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->middleware('can:delete,comment');
        
-        
         Route::get('notifications', [NotificationController::class, 'index']);
         Route::get('notifications/{notification}/markAsRead', [NotificationController::class, 'update']);
         
