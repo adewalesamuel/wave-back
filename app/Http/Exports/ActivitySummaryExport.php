@@ -23,13 +23,11 @@ class ActivitySummaryExport implements FromView
 
 
         if (request()->query('start_year') && request()->query('end_year')) {
-            $parent_activities = $parent_activities
-            ->where('project_id', request()->query('project_id'))
+            $parent_activities = $parent_activities->where('project_id', request()->query('project_id'))
             ->whereDate('start_date', ">=", date('Y-m-d', strtotime(request()->query('start_year') . "-01-01")))
             ->whereDate('end_date', "<=", date('Y-m-d', strtotime(request()->query('end_year') . "-12-31")));
 
-            $child_activities = $child_activities
-            ->where('project_id', request()->query('project_id'))
+            $child_activities = $child_activities->where('project_id', request()->query('project_id'))
             ->whereDate('start_date', ">=", date('Y-m-d', strtotime(request()->query('start_year') . "-01-01")))
             ->whereDate('end_date', "<=", date('Y-m-d', strtotime(request()->query('end_year') . "-12-31")));
         }

@@ -20,6 +20,7 @@ use App\Http\Controllers\ActivityIndicatorController;
 use App\Http\Controllers\GraphController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\OutcomeController;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +126,8 @@ Route::name('api.')->group(function() {
         
         Route::post('activity_indicators', [ActivityIndicatorController::class, 'store']);
         Route::delete('activity_indicators/{activity_indicator}', [ActivityIndicatorController::class, 'destroy']);
+
+        Route::post('upload', [FileUploadController::class, 'store']);
 
         Route::any('test', function () {
             return response()->json(["status" => "ok"], 200);

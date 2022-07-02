@@ -58,9 +58,7 @@ class CollectedDataController extends Controller
         $collected_data->disaggregation_values = $data['disaggregation_values'] ?? null;
         $collected_data->created_by = auth('api')->user()->id;
         $collected_data->indicator_id = $data['indicator_id'] ?? null;
-        
-        if ($request->hasFile('collected_data_file'))
-            $collected_data->file_url = $request->collected_data_file->store("files","public");
+        $collected_data->files_urls = $data['files_urls'] ?? null;
 
         $collected_data->save();
 
@@ -116,9 +114,7 @@ class CollectedDataController extends Controller
         $collected_data->disaggregation_values = $data['disaggregation_values'] ?? null;
         $collected_data->created_by = auth('api')->user()->id;
         $collected_data->indicator_id = $data['indicator_id'] ?? null;
-
-        if ($request->hasFile('collected_data_file'))
-            $collected_data->file_url = $request->collected_data_file->store("files","public");
+        $collected_data->files_urls = $data['files_urls'] ?? null;
 
         $collected_data->save();
 

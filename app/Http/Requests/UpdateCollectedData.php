@@ -25,13 +25,10 @@ class UpdateCollectedData extends FormRequest
     {
         return [
             'values' => 'required|string',
-            'notes' => '',
-            'file_name' => '',
-            'collected_data_file' => '', //mimes:pdf,csv,doc,xml,docx,txt,ppt,pptx,odf,odt,html,xls,xlsx,jpg,mp4,mp3,jpeg,png,gif,zip,rar,avi,mov,flv,wav
+            'notes' => 'nullable|string',
+            'files_urls' => 'nullable|json', //mimes:pdf,csv,doc,xml,docx,txt,ppt,pptx,odf,odt,html,xls,xlsx,jpg,mp4,mp3,jpeg,png,gif,zip,rar,avi,mov,flv,wav
             'collection_date' => 'required|date',
-            'budget' => 'nullable|integer',
-            'amount_spent' => 'nullable|integer',
-            'disaggregation_values' => 'json',
+            'disaggregation_values' => '',
             'indicator_id' => 'required|integer|exists:indicators,id'
         ];
     }
